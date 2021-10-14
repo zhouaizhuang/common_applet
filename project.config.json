@@ -38,7 +38,7 @@
     "showES6CompileOption": false,
     "minifyWXML": true
   },
-  "compileType": "miniprogram",
+  "compileType": "commom_applet",
   "libVersion": "2.19.4",
   "appid": "wxdc99029038c52e9d",
   "projectname": "miniprogram-1",
