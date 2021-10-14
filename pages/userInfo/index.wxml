@@ -1,0 +1,46 @@
+<!--pages/userInfo/index.wxml-->
+<view>
+  <!--1、如果仅仅是想在页面显示一下，那么这样子就足够了-->
+  <view class="b fs32r g1890ff mb20r">1、仅仅显示，免授权（但是代码拿不到实际数据）</view>
+  <view class="f rw ac xc mb50r" wx:if="{{canIUseOpenData}}">
+    <view class="mr20r" style="width:100rpx;height:100rpx;" bindtap="bindViewTap">
+      <open-data type="userAvatarUrl"></open-data> <!--用户头像-->
+    </view>
+    <view class="w20">
+      <open-data type="userNickName"></open-data> <!--用户名称-->
+    </view>
+    <view class="w20">
+      <open-data type="groupName"></open-data> <!--拉取群名称-->
+    </view>
+    <view class="w20">
+      <open-data type="userGender" lang="zh_CN"></open-data> <!--用户性别-->
+    </view>
+    <view class="w20">
+      <open-data type="userCity" lang="zh_CN"></open-data>  <!--用户所在城市-->
+    </view>
+    <view class="w20">
+      <open-data type="userProvince" lang="zh_CN"></open-data>  <!--用户所在省份-->
+    </view>
+    <view class="w20">
+      <open-data type="userCountry" lang="zh_CN"></open-data> <!--用户所在国家-->
+    </view>
+    <view class="w20">
+      <open-data type="userLanguage" lang="zh_CN"></open-data>  <!--用户的语言-->
+    </view>
+  </view>
+
+  <!--2、如果希望将用户头像数据存起来。那么需要告知用户数据用途并让用户授权-->
+  <view class="b fs32r g1890ff mb20r">2、用户手动授权(可以实际拿到实际数据并存储)</view>
+  <view wx:if="{{!hasUserInfo}}">
+    <button class="fs28r" wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
+    <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <view wx:else> 请使用1.4.4及以上版本基础库 </view>
+  </view>
+  <view  class="f ac xc mb50r" wx:else>
+    <image bindtap="bindViewTap" class="mr20r" style="width:100rpx;height:100rpx;" src="{{userInfo.avatarUrl}}"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  </view>
+
+
+
+</view>
