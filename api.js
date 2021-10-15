@@ -1,4 +1,15 @@
 /* 小程序公用js代码 */
+// 获取微信信息
+export const getUserProfile = function () {
+  return new Promise((resolve, reject) => {
+    wx.getUserProfile({
+      desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+      lang: 'zh_CN',
+      success: res => resolve(res.userInfo),
+      fail: err => reject(err)
+    })
+  })
+}
 // 显示loading
 export const showLoading = function (title = '加载中', duration = 0, mask = true) {
   wx.showLoading({ title, mask})
