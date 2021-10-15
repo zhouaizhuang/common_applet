@@ -147,9 +147,28 @@ export const setPageTitle = function (title = '') {
   return new Promise((resolve, reject) => {
     wx.setNavigationBarTitle({
       title,
-      success: res => { resolve(res) },
-      fail: err => { reject(err) }
+      success: res => resolve(res),
+      fail: err => reject(err)
     })
+  })
+}
+// 设置当前导航条风格
+export const setNavigationBarColor = function (frontColor,backgroundColor, animation = {} ) {
+  return new Promise((resolve, reject) => {
+    wx.setNavigationBarColor({
+      frontColor, // 文字颜色
+      backgroundColor, // 导航条背景
+      animation, // 动画时间、动画函数。举例子： {  duration: 400, timingFunc: 'easeIn'}
+      success: res => resolve(res),
+      fail: err => reject(err)
+    })
+  })
+}
+// 滚动到页面什么位置
+export const pageScrollTo = function (scrollTop, duration) {
+  wx.pageScrollTo({
+    scrollTop, // 滚动到什么位置： 0代表页面顶部
+    duration // 滚动执行耗时多少ms
   })
 }
 // 获取用户当前的权限有哪些
