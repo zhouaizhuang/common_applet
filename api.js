@@ -90,6 +90,39 @@ export const reLaunch = function (url = '', time = 0){
     }, time)
   })
 }
+// 跳转小程序
+export const navigateToMiniProgram = function (params = {}){
+  return new Promise((resolve, reject) => {
+    wx.navigateToMiniProgram({
+      appId: '', // 要打开的小程序 appId
+      path: 'pages/index/index', // 打开的页面路径，如果为空则打开首页
+      extraData: '', // 需要传递给目标小程序的数据，目标小程序可在 App.onLaunch，App.onShow 中获取到这份数据
+      envVersion: 'develop', // trial | release 要打开的小程序版本。仅在当前小程序为开发版或体验版时此参数有效。如果当前小程序是正式版，则打开的小程序必定是正式版。
+      shortLink: '', // 小程序链接，当传递该参数后，可以不传 appId 和 path。链接可以通过【小程序菜单】->【复制链接】获取。
+      ...params,
+      success: res => resolve(res),
+      fail: err => reject(err)
+    })
+  })
+}
+// 跳转之后，返回原小程序
+export const navigateBackMiniProgram = function (extraData = {}){
+  return new Promise((resolve, reject) => {
+    wx.navigateBackMiniProgram({
+      extraData, //  举例：{foo: 'bar'}
+      success: res=> resolve(res),
+      fail: err => reject(err)
+    })
+  })
+}
+export const exitMiniProgram = function (){
+  return new Promise((resolve, reject) => {
+    wx.exitMiniProgram({
+      success: res=> resolve(res),
+      fail: err => reject(err)
+    })
+  })
+}
 // 设置当前页面的标题
 export const setPageTitle = function (title = '') {
   return new Promise((resolve, reject) => {
