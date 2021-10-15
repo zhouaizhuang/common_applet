@@ -30,8 +30,8 @@ export const showToast = (title, delay = 0, duration = 3000, icon='none') => {
     }, delay)
   }
 }
-// 页面跳转
-export const go = function (url = '', time = 0) {
+// 页面跳转(可返回上一个页面)
+export const navigateTo = function (url = '', time = 0) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       wx.navigateTo({
@@ -43,11 +43,47 @@ export const go = function (url = '', time = 0) {
   })
 }
 // 返回页面栈前面N页, 延时time毫秒执行, 返回promise对象
-export const goBack = function (delta = 1, time = 0) {
+export const navigateBack = function (delta = 1, time = 0) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       wx.navigateBack({
         delta,
+        success: res => { resolve(res) },
+        fail: err => { reject(err) }
+      })
+    }, time)
+  })
+}
+// 跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面（不可返回）
+export const switchTab = function (url = '', time = 0){
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      wx.switchTab({
+        url,
+        success: res => { resolve(res) },
+        fail: err => { reject(err) }
+      })
+    }, time)
+  })
+}
+// 关闭当前页面，跳转到应用内的某个页面（不可返回, 不可以跳转到tabbar页面）
+export const redirectTo = function (url = '', time = 0){
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      wx.redirectTo({
+        url,
+        success: res => { resolve(res) },
+        fail: err => { reject(err) }
+      })
+    }, time)
+  })
+}
+// 关闭当前页面，跳转到应用内的某个页面（不可返回, 不可以跳转到tabbar页面）
+export const reLaunch = function (url = '', time = 0){
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      wx.reLaunch({
+        url,
         success: res => { resolve(res) },
         fail: err => { reject(err) }
       })
@@ -103,4 +139,3 @@ export const checkUpdateVersion = function () {
     })
   }
 }
-
