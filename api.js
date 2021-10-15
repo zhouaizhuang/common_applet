@@ -210,3 +210,15 @@ export const checkUpdateVersion = function () {
     })
   }
 }
+// 设置localstorage
+export const setLocalStorage = function (key = '', val = ''){
+  wx.setStorageSync(key, val)
+}
+// 查看localstorage
+export const getLocalStorage = function (key = ''){
+  wx.getStorageSync(key)
+}
+// 清除localStorage
+export const clearLocalStorage = function (){
+  wx.clearStorageSync()
+}
