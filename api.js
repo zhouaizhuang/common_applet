@@ -30,6 +30,25 @@ export const showToast = (title, delay = 0, duration = 3000, icon='none') => {
     }, delay)
   }
 }
+// 模态框封装
+export const showModal = (title = '标题', content = '这是一个模态弹窗') => {
+  if(title) {
+    return new Promise((resolve, reject) => {
+      wx.showModal({
+        title,
+        content,
+        success (res) {
+          if (res.confirm) {
+            resolve()
+          } else if (res.cancel) {
+            reject('用户点击了取消')
+          }
+        },
+        fail: err => reject(err)
+      })
+    })
+  }
+}
 // 页面跳转(可返回上一个页面)
 export const navigateTo = function (url = '', time = 0) {
   return new Promise((resolve, reject) => {
