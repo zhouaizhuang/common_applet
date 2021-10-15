@@ -53,3 +53,43 @@ export const setPageTitle = function (title = '') {
     })
   })
 }
+// 获取用户当前的权限有哪些
+// 返回结果，事例：{scope.address: true, scope.invoice: true, scope.invoiceTitle: true ,scope.userInfo: true}
+export const getSetting = function (){
+  return new Promise((resolve, reject) => {
+    wx.getSetting({
+      success: res => resolve(res.authSetting),
+      fail: err => reject(err)
+    })
+  })
+}
+// 检查更新
+// 使用方法: 在app.js的onlaunch中直接调用这个方法
+export const checkUpdateVersion = function () {
+  if (wx.canIUse('getUpdateManager')) { //判断微信版本是否 兼容小程序更新机制API的使用
+    const updateManager = wx.getUpdateManager() //创建 UpdateManager 实例
+    updateManager.onCheckForUpdate(function(res) { //检测版本更新
+      if (res.hasUpdate) { // 请求完新版本信息的回调
+        updateManager.onUpdateReady(function() { //监听小程序有版本更新事件
+          wx.showModal({ //TODO 新的版本已经下载好，调用 applyUpdate 应用新版本并重启 （ 此处进行了自动更新操作）
+            title: '更新提示',
+            content: '新版本已经准备好，是否重启应用？',
+            success: res => { if (res.confirm) { updateManager.applyUpdate() } } // 调用 applyUpdate 应用新版本并重启
+          })
+        })
+        updateManager.onUpdateFailed(function() {
+          wx.showModal({ // 新版本下载失败
+            title: '已经有新版本了哟~',
+            content: '新版本已经上线啦~，请您删除当前小程序，重新搜索打开哟~',
+          })
+        })
+      }
+    })
+  } else {
+    wx.showModal({ //TODO 此时微信版本太低（一般而言版本都是支持的）
+      title: '溫馨提示',
+      content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+    })
+  }
+}
+
