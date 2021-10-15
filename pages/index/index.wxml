@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="h100vh f rw b fs32r tc">
+<view class="h100vh f rw b fs32r tc pt30r">
   <view class="w50 mb30r" bindtap="goUserInfo">用户信息</view>
-  <view class="w50 mb30r"></view>
+  <view class="w50 mb30r" bindtap="goUpdate"></view>
 </view>
