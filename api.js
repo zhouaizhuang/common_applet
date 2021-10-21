@@ -21,6 +21,16 @@ export const showLoading = function (title = '加载中', duration = 0, mask = t
 export const hideLoading = function (time = 0) {
   setTimeout(() => { wx.hideLoading() }, time)
 }
+// 显示操作菜单
+export const showActionSheet = function (itemList){
+  return new Promise((resolve, reject) => {
+    wx.showActionSheet({
+      itemList,
+      success: res => resolve(res),
+      fail: res => reject(res)
+    })
+  })
+}
 // 显示提示弹框
 export const showToast = (title, delay = 0, duration = 3000, icon='none') => {
   if(title) {
@@ -221,4 +231,80 @@ export const getLocalStorage = function (key = ''){
 // 清除localStorage
 export const clearLocalStorage = function (){
   wx.clearStorageSync()
+}
+/*****************图片相关api*************** */
+// 获取图片信息
+/**
+ * 
+ * @param {*} src // 注意： 需要在小程序后台配置download图片合法域名，否则无法使用
+ * @returns {promise}
+ */
+export const getImageInfo = function (src){
+  return new Promise((resolve, reject) => {
+    wx.getImageInfo({
+      src, // 图片路径
+      success: res => resolve(res), // {errMsg: "getImageInfo:ok",height: 66,orientation: "up",path: "http://tmp/rp35Y5PWoonk2ca2d1abcb9a7c0283e56df60f891ab4.png",type: "png",width: 62}
+      fail: err => reject(err)
+    });
+  })
+}
+/** 保存图片到相册
+ * @param {*} filePath // 小程序需要https图片文件路径，可以是临时文件路径或者永久文件路径（本地路径）。如果是网络图片，需要先使用getImageInfo获取临时路径
+ * @returns {promise}
+ */
+export const saveImg2Album = function (filePath) {
+  return new Promise((resolve, reject) => {
+    wx.saveImageToPhotosAlbum({
+      filePath: filePath.replace('http:', 'https:'), // 小程序需要https图片文件路径，可以是临时文件路径或者永久文件路径（本地路径）
+      success: res => resolve(res),
+      fail: err => reject(err)
+    })
+  })
+}
+/**预览图片和视频
+ * https://developers.weixin.qq.com/miniprogram/dev/api/media/image/wx.previewMedia.html
+ * @param {*} sources // [{url:'http://tmp/rp35Y5PWoonk2ca2d1abcb9a7c0283e56df60f891ab4.png'}]
+ * @returns 
+ */
+export const previewMedia = function (params = {}){
+  return new Promise((resolve, reject) => {
+    wx.previewMedia({
+      sources: [],
+      current: 0,
+      showmenu: false,
+      ...params,
+      success: res => resolve(res),
+      reject: err => reject(err)
+    })
+  })
+}
+/** 预览图片
+ * https://developers.weixin.qq.com/miniprogram/dev/api/media/image/wx.previewImage.html
+ * @param {*} params 
+ * @returns 
+ */
+export const previewImage = function (params = {}){
+  return new Promise((resolve, reject) => {
+    wx.previewImage({
+      urls: [],
+      showmenu: false,
+      current: '',
+      ...params,
+      success: res => resolve(res),
+      reject: err => reject(err)
+    })
+  })
+}
+/**拨打电话
+ * @param {*} phoneNumber // 电话号码
+ * @returns 
+ */
+ export const call = function (phoneNumber){
+  return new Promise((resolve, reject) => {
+    wx.makePhoneCall({
+      phoneNumber,
+      success: res => resolve(res),
+      reject: err => reject(err)
+    })
+  })
 }
