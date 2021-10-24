@@ -1,5 +1,5 @@
 // pages/userInfo/index.js
-import { getUserProfile } from "../../api"
+import { getUserProfile, getLocalStorage  } from "../../api"
 Page({
 
   /**
