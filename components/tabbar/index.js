@@ -34,18 +34,18 @@ Component({
         redirectTo('/pages/interactive/index') // 交互动效
       }
     },
-    async goQrcode(){
-      const token = getLocalStorage('token') || ''
-      if(!token) {
-        return this.setData({isShowLogin:true})
+    // async goQrcode(){
+    //   const token = getLocalStorage('token') || ''
+    //   if(!token) {
+    //     return this.setData({isShowLogin:true})
+    //   }
+    //   const {path} = await getQrCode()
+    //   navigateTo(path)
+    // },
+    goProblem(){
+      if(this.data.selectTab !== 'problem') {
+        redirectTo('/pages/problem/index')
       }
-      const {path} = await getQrCode()
-      navigateTo(path)
     },
-    goMine(){
-      if(this.data.selectTab !== 'mine') {
-        redirectTo('/pages/mine/index')
-      }
-    }
   }
 })

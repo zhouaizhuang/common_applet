@@ -1,0 +1,9 @@
+<!--index.wxml-->
+<view class="bgf5" style="min-height:100vh;">
+  <view class="f rw b fs32r tc pt30r">
+    <view class="w50 mb50r">疑难问题1</view>
+    <view class="w50 mb50r">疑难问题2</view>
+    <view class="w50 mb50r">疑难问题3</view>
+  </view>
+  <tabbar selectTab="problem"></tabbar>
+</view>

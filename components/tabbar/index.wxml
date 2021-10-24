@@ -10,11 +10,11 @@
   </view>
   -->
   <view bindtap="goInteractive" class="f1 f rw ac xc pt20r pb20r">
-    <image src="{{selectTab == 'index'? 'http://r0stwq2aa.bkt.clouddn.com/xcx/scmx_home_light.png' : 'http://r0stwq2aa.bkt.clouddn.com/xcx/scmx_home_grew.png'}}" class="mb10r" style="width:44rpx;height:44rpx;"></image>
-    <view class="w100 tc fs22r {{ selectTab == 'index' ? 'g2326aa' : 'g7c8094' }}">交互动效</view>
+    <image src="{{selectTab == 'interactive'? 'http://r0stwq2aa.bkt.clouddn.com/xcx/scmx_home_light.png' : 'http://r0stwq2aa.bkt.clouddn.com/xcx/scmx_home_grew.png'}}" class="mb10r" style="width:44rpx;height:44rpx;"></image>
+    <view class="w100 tc fs22r {{ selectTab == 'index' ? 'g2326aa' : 'g7c8094' }}">组件动效</view>
   </view>
-  <view bindtap="goMine" class="f1 f rw ac xc pt20r pb20r">
-    <image src="{{selectTab == 'mine'? 'http://r0stwq2aa.bkt.clouddn.com/xcx/scmx_smile_light.png' : 'http://r0stwq2aa.bkt.clouddn.com/xcx/scmx_smile_grew.png'}}" class="mb10r" style="width:44rpx;height:44rpx;"></image>
+  <view bindtap="goProblem" class="f1 f rw ac xc pt20r pb20r">
+    <image src="{{selectTab == 'problem'? 'http://r0stwq2aa.bkt.clouddn.com/xcx/scmx_smile_light.png' : 'http://r0stwq2aa.bkt.clouddn.com/xcx/scmx_smile_grew.png'}}" class="mb10r" style="width:44rpx;height:44rpx;"></image>
     <view class="w100 tc fs22r {{ selectTab == 'mine' ? 'g2326aa' : 'g7c8094' }}">疑难问题</view>
   </view>
 </view>

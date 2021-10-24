@@ -1,5 +1,9 @@
 <!--index.wxml-->
-<view class="h100vh f rw b fs32r tc pt30r">
-  <view class="w50 mb30r" bindtap="goUserInfo">用户信息</view>
-  <view class="w50 mb30r" bindtap="goOtherApplet">跳转其他小程序</view>
+<view class="bgf5" style="min-height:100vh;">
+  <view class="f rw b fs32r tc pt30r">
+    <view class="w50 mb50r" bindtap="goUserInfo">用户信息</view>
+    <view class="w50 mb50r" bindtap="goOtherApplet">跳转其他小程序</view>
+    <view class="w50 mb50r" bindtap="test">预览图片</view>
+  </view>
+  <tabbar selectTab="index"></tabbar>
 </view>
