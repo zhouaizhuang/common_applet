@@ -39,7 +39,7 @@
   <view wx:else class="f rw ac xc mb100r" >
     <image bindtap="bindViewTap" class="mr20r" style="width:100rpx;height:100rpx;" src="{{userInfo.avatarUrl}}"></image> <!--用户头像-->
     <view class="w30">{{userInfo.nickName}}</view> <!--用户名称-->
-    <view class="w20">{{userInfo.gender == 1 ? '男' : '女'}}</view> <!--用户性别-->
+    <view class="w20">{{userInfo.gender == 0 ? '男' : '女'}}</view> <!--用户性别-->
     <view class="w20">{{userInfo.country}}</view> <!--用户所在国家-->
     <view class="w20">{{userInfo.province}}</view> <!--用户所在省份-->
     <view class="w20">{{userInfo.city}}</view> <!--用户所在城市-->

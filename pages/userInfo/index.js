@@ -10,6 +10,7 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'), // 当前环境是否可以使用wx.getuserInfo
     canIUseGetUserProfile: false, // 当前环境是否可以使用wx.getUserProfile。默认是false
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
+    code: '',
   },
   async getUserData(){
     const userInfo = await getUserProfile()
@@ -22,18 +23,11 @@ Page({
   // 目前该接口针对非个人开发者
   // https://blog.csdn.net/chen_pan_pan/article/details/80606658
   getPhoneNumber (e) {
-    console.log(e)
-    const { iv, encryptedData } = e.detail
-    console.log(iv)
-    wx.login({
-      success: res => {
-        const { code } = res 
-        // code用于获取用户的openID和sessionKey
-        // 后台根据参数【encryptedData】 、【iv】 、【sessionKey】解密获取用户手机号
-        console.log(iv, encryptedData, code)
-        
-      }
-    })
+    // 需要这5个值：code, iv, encryptedData, avatar、nickName都传给后端。肯定能注册成功的了
+    const { iv, encryptedData } = e.detail // 用于解析手机号
+    const { code } = this.data // 用于解析openid
+    const { avatar, nickName } = this.data.userInfo// 如果后台还需要存储用户的头像和微信昵称，那么在用户信息授权的时候把这两个值avatar、nickName保存。
+    // await post('xxxx', { code, iv, encryptedData, avatar,nickName })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -42,6 +36,19 @@ Page({
     if (wx.getUserProfile) {
       this.setData({
         canIUseGetUserProfile: true // 检测成功，则置为true
+      })
+    }
+    // 必须在页面一开始先获取code. 因为微信有个bug就是。放在获取code的回调用调用解密手机号接口。概率失败
+    // https://developers.weixin.qq.com/community/develop/doc/000466ea294fe0c50266ac5b15b800
+    const token = getLocalStorage('token') || ''
+    if(!token) {
+      wx.login({
+        success: res => {
+          this.setData({code: res.code})
+        },
+        fail: err => {
+          showToast('获取微信code失败' + err)
+        }
       })
     }
   },
