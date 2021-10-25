@@ -226,7 +226,7 @@ export const setLocalStorage = function (key = '', val = ''){
 }
 // 查看localstorage
 export const getLocalStorage = function (key = ''){
-  wx.getStorageSync(key)
+  return wx.getStorageSync(key)
 }
 // 清除localStorage
 export const clearLocalStorage = function (){
