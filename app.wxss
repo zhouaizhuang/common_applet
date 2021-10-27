@@ -2,6 +2,7 @@
 /** 微信小程序，通用css样式库
 * 以下所有样式根据需要可自行扩展，只允许编写常用样式在此文件中。样式名必须简洁，否则class容易出现代码膨胀
 */
+.safeDistance{padding-bottom: env(safe-area-inset-bottom);} /*ios底部安全距离*/
 /* 显示与隐藏 */
 .dn{display:none;}  .di{display:inline;}.db{display:block;} .dib{display:inline-block;}
 .hidden{position: absolute; visibility: hidden;} .show{position: static; visibility:visible;}
