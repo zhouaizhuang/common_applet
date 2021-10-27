@@ -300,10 +300,26 @@ export const previewImage = function (params = {}){
  * @param {*} phoneNumber // 电话号码
  * @returns 
  */
- export const call = function (phoneNumber){
+ export const makePhoneCall = function (phoneNumber){
   return new Promise((resolve, reject) => {
     wx.makePhoneCall({
-      phoneNumber,
+      phoneNumber: String(phoneNumber),
+      success: res => resolve(res),
+      reject: err => reject(err)
+    })
+  })
+}
+// 调用地图导航
+export const openLocation = function(params = {}){
+  const {latitude, longitude } = params
+  return new Promise((resolve, reject) => {
+    wx.openLocation({
+      ...params,
+      // name,
+      // address,
+      scale: 18,
+      latitude: Number(latitude),
+      longitude: Number(longitude),
       success: res => resolve(res),
       reject: err => reject(err)
     })
