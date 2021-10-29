@@ -1,0 +1,23 @@
+{
+  "name": "common_applet",
+  "version": "1.0.0",
+  "description": "存放小程序demo",
+  "main": ".eslintrc.js",
+  "dependencies": {
+    "vant-weapp": "^0.5.29"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhouaizhuang/common_applet.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhouaizhuang/common_applet/issues"
+  },
+  "homepage": "https://github.com/zhouaizhuang/common_applet#readme"
+}

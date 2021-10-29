@@ -12,6 +12,5 @@
     "navigationBarTitleText": "通用小程序代码",
     "navigationBarTextStyle":"black"
   },
-  "style": "v2",
   "sitemapLocation": "sitemap.json"
 }
