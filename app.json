@@ -5,7 +5,8 @@
     "pages/interactive/index",
     "pages/problem/index",
     "pages/yiqingTotal/index",
-    "pages/poster/index"
+    "pages/poster/index",
+    "pages/richText/index"
   ],
   "window":{
     "backgroundTextStyle":"light",

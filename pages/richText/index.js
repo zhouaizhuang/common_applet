@@ -1,5 +1,4 @@
-// pages/problem/index.js
-import { navigateTo } from "../../api"
+var WxParse = require('../../libs/wxParse/wxParse.js');
 Page({
 
   /**
@@ -8,20 +7,19 @@ Page({
   data: {
 
   },
-  goYQ(){
-    navigateTo('../yiqingTotal/index')
-  },
-  goPoster(){
-    navigateTo('../poster/index')
-  },
-  goRichText(){
-    navigateTo('../richText/index')
+  async getDetail(){
+    // const { id } = this.data.options
+    // let detail = await post('/miniapp/activity/detail', {id})
+    let detail = {
+      content: '<p style="font-size:30px;color:blue;">这是后台富文本用户录入的数据</p>'
+    }
+    WxParse.wxParse('content', 'html', detail.content, this, 5) // 富文本html转wxml
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getDetail()
   },
 
   /**

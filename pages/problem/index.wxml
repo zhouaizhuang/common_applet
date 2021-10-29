@@ -3,7 +3,7 @@
   <view class="f rw b fs32r tc">
     <view bindtap="goYQ" class="w50 pt30r pb20r">jsonp使用方法</view>
     <view bindtap="goPoster" class="w50 pt30r pb20r">小程序分享海报</view>
-    <view class="w50 pt20r pb20r">疑难问题3</view>
+    <view bindtap="goRichText" class="w50 pt20r pb20r">小程序渲染富文本</view>
   </view>
   <tabbar selectTab="problem"></tabbar>
 </view>
