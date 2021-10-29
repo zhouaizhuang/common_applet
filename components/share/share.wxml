@@ -1,0 +1,35 @@
+<view class="share-dialog {{show ? 'share-dialog_show' : ''}}" catchtouchmove="preventdefault" catchtap="preventdefault">
+  <view wx:if="{{mask}}" class="weui-mask" bindtap="close"></view>
+  <view class="weui-actionsheet {{show ? 'weui-actionsheet_toggle' : ''}}">
+    <view class="weui-flex">
+      <view class="weui-flex__item">
+        <view class="placeholder">
+          <button hover-class="none" open-type="share" bindtap="tofriends" size="mini" class="btn">
+            <view class="iconfont icon-wechat"></view>
+            <view class="share-meta">发送给朋友</view>
+          </button>
+        </view>
+      </view>
+      <view class="weui-flex__item">
+        <view class="placeholder">
+          <button hover-class="none" bindtap="toMoments" size="mini" class="btn">
+            <view class="iconfont {{loading?'weui-loading':'icon-moments'}}"></view>
+            <view class="share-meta">分享到朋友圈</view>
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- poster-->
+<painter style="position:fixed;top:-9999rpx" palette="{{palette}}" bind:imgOK="onImgOK" />
+<view class="fadeIn" wx:if="{{showPoster}}">
+    <view class="weui-mask"></view>
+    <view class="weui-dialog">
+        <image src="{{poster}}" mode='widthFix' style="margin:0 auto;width:100%;"></image>
+        <view class="weui-dialog__ft">
+            <button class="weui-dialog__btn_default" bindtap="onShareCancel">取消</button>
+            <button class="weui-dialog__btn_primary" bindtap="save">保存</button>
+        </view>
+    </view>
+</view>

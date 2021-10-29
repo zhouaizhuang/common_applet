@@ -1,8 +1,8 @@
 <!--index.wxml-->
 <view class="bgf5" style="min-height:100vh;">
-  <view class="f rw b fs32r tc pt30r">
-    <view bindtap="goYQ" class="w50 pt20r pb20r">jsonp使用方法</view>
-    <view class="w50 pt20r pb20r">疑难问题2</view>
+  <view class="f rw b fs32r tc">
+    <view bindtap="goYQ" class="w50 pt30r pb20r">jsonp使用方法</view>
+    <view bindtap="goPoster" class="w50 pt30r pb20r">小程序分享海报</view>
     <view class="w50 pt20r pb20r">疑难问题3</view>
   </view>
   <tabbar selectTab="problem"></tabbar>

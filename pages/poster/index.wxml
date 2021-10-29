@@ -1,0 +1,2 @@
+<view bindtap="toShare" class="w80 rds50r auto f ac xc pt30r pb30r linear4b83f9">分享</view>
+<share show="{{shareShow}}" bind:setPoster="toMoments" palette="{{palette}}"></share>

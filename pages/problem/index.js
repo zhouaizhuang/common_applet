@@ -11,6 +11,9 @@ Page({
   goYQ(){
     navigateTo('../yiqingTotal/index')
   },
+  goPoster(){
+    navigateTo('../poster/index')
+  },
   /**
    * 生命周期函数--监听页面加载
    */
