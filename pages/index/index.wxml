@@ -2,7 +2,7 @@
 <view class="bgf5" style="min-height:100vh;">
   <view class="f rw b fs32r tc pt30r">
     <view class="w50 mb50r" bindtap="goUserInfo">用户信息</view>
-    <view class="w50 mb50r" bindtap="goOtherApplet">跳转其他小程序</view>
+    <view class="w50 mb50r" bindtap="goOtherApplet">跳转任意小程序</view> <!--跳转其他小程序。如何获取其他小程序的appid和页面路径，亲测有效。https://blog.csdn.net/xiyang1011/article/details/110385375-->
     <view class="w50 mb50r" bindtap="test">预览图片</view>
   </view>
   <tabbar selectTab="index"></tabbar>
