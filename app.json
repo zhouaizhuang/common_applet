@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/userInfo/index",
     "pages/interactive/index",
-    "pages/problem/index"
+    "pages/problem/index",
+    "pages/yiqingTotal/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
