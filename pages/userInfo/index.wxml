@@ -30,10 +30,10 @@
   </view>
 
   <!--2、如果希望将用户头像数据存起来。那么需要告知用户数据用途并让用户授权-->
-  <view class="b fs32r g1890ff mb20r">2、用户手动授权(可以实际拿到实际数据并存储)</view>
+  <view class="b fs32r g1890ff mb20r">2、用户手动授权(无法拿到实际数据)</view>
   <view class="mb100r" wx:if="{{userInfo == ''}}">
-    <button class="fs28r" wx:if="{{canIUseGetUserProfile}}" bindtap="getUserData">授权获取头像昵称地区等信息</button>
-    <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权获取头像昵称地区等信息</button>
+    <button class="fs28r" class="linear4b83f9 gf" wx:if="{{canIUseGetUserProfile}}" bindtap="getUserData">授权获取头像昵称地区等信息</button>
+    <button wx:elif="{{canIUse}}" class="linear4b83f9 gf" open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权获取头像昵称地区等信息</button>
     <view wx:else> 请使用1.4.4及以上版本基础库 </view>
   </view>
   <view wx:else class="f rw ac xc mb100r" >

@@ -300,7 +300,7 @@ export const previewImage = function (params = {}){
  * @param {*} phoneNumber // 电话号码
  * @returns 
  */
- export const makePhoneCall = function (phoneNumber){
+export const makePhoneCall = function (phoneNumber){
   return new Promise((resolve, reject) => {
     wx.makePhoneCall({
       phoneNumber: String(phoneNumber),
