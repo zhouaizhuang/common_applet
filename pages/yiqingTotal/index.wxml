@@ -1,0 +1,64 @@
+<view class="rel bgfbf8f3">
+  <image class="db w100" style="height:300rpx;" src="https://upload.qianfanyun.com/yjyn/ylyn_yiqing_info_top.png"></image>
+  <!--第一块-->
+  <view class="rel zx10 bgf mb5r" style="border-radius:30rpx 30rpx 0 0;transform:translateY(-25rpx);padding: 64rpx 30rpx 30rpx 30rpx;">
+    <view class="f">
+      <image class="mr25r" style="width:40rpx;height:40rpx;" src="https://upload.qianfanyun.com/yjyn/ylyn_high_danger.png"></image>
+      <view class="f1" style="transform:translateY(-35rpx);">
+        <view class="w100 g3 fs36r b mb15r">高风险地区<text class="gdc1001 pl10r pr10r" style="font-size:56rpx;">{{count[2]}}</text>个</view>
+        <view class="w100 g9 fs26r">截止统计{{dateline[2]}}</view>
+      </view>
+    </view>
+    <view class="pt40r" style="border-top:1rpx solid #e5e5e5;">
+      <view wx:for="{{highDangerArea}}" wx:for-item="item" wx:for-index="index" wx:key="unique" class="f as mb40r rel">
+        <view class="rds10r f ac xc pl25r pr25r mr28r lt10r b fs28r abs t0 b0 l0" style="min-height:130rpx;writing-mode:vertical-lr;background-color:rgba(220, 16, 1, .15)">{{item.label}}</view>
+        <view class="f1 f as rw" style="padding-left:120rpx;min-height:130rpx;">
+          <view wx:for="{{item.list}}" wx:for-item="areaItem" wx:for-index="areaIndex" wx:key="unique" class="w100 f g3 fs30r {{areaIndex + 1 == item.list.length ? '' : 'mb20r'}}">
+            <view style="width:170rpx;">{{areaItem.city}}</view>
+            <view class="f1">{{areaItem.addr}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--第二块-->
+  <view class="bgf mb30r" style="padding:64rpx 30rpx 30rpx 30rpx;">
+    <view class="f mb10r">
+      <image class="mr25r" style="width:40rpx;height:40rpx;" src="https://upload.qianfanyun.com/yjyn/ylyn_low_danger.png"></image>
+      <view class="f1" style="transform:translateY(-35rpx);">
+        <view class="w100 g3 fs36r b mb15r">中风险地区<text class="gf18112 pl10r pr10r" style="font-size:56rpx;">{{count[1]}}</text>个</view>
+        <view class="w100 g9 fs26r">截止统计{{dateline[1]}}</view>
+      </view>
+    </view>
+    <view class="pt40r" style="border-top:1rpx solid #e5e5e5;">
+      <view wx:for="{{middleDangerArea}}" wx:for-item="item" wx:for-index="index" wx:key="unique" class="f as mb40r rel">
+        <view class="rds10r f ac xc pl25r pr25r mr28r lt10r b fs28r abs t0 b0 l0" style="min-height:130rpx;writing-mode:vertical-lr;background-color:rgba(241, 129, 18, .15)">{{item.label}}</view>
+        <view class="f1 f as rw" style="padding-left:130rpx;min-height:120rpx;">
+          <view wx:for="{{item.list}}" wx:for-item="areaItem" wx:for-index="areaIndex" wx:key="unique" class="w100 f g3 fs28r {{areaIndex + 1 == item.list.length ? '' : 'mb20r'}}">
+            <view style="width:170rpx;">{{areaItem.city}}</view>
+            <view class="f1"><view class="wrap">{{areaItem.addr}}</view></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--第三块-->
+  <view class="bgf mt20r" style="padding: 27rpx 30rpx 30rpx 50rpx;">
+    <view class="g2 b lt10r fs36r mb12r">其他说明</view>
+    <view class="g2 fs24r mb15r">以县市区为单位</view>
+    <!--
+    <view class="f fs24r mb15r">
+      <view class="g42b260 mr15r f rn b">低风险地区：</view>
+      <view class="f1 fs24r g2">无确诊病例或连续14天新增确诊病例为低风险地区</view>
+    </view>
+    -->
+    <view class="f fs24r mb15r">
+      <view class="gf18112 mr15r f rn b">中风险地区：</view>
+      <view class="f1 fs24r g2">14天内有新增确诊病例，累计确诊病例不超过50例。14天内未发生聚集性疫情为中风险地区</view>
+    </view>
+    <view class="f fs24r mb15r">
+      <view class="gdc1001 mr15r f rn b">高风险地区：</view>
+      <view class="f1 fs24r g2">累计确诊病例超过50例，14天内有聚集性疫情发生为高风险地区</view>
+    </view>
+  </view>
+</view>
