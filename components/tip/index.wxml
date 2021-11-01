@@ -1,0 +1,9 @@
+<view wx:if="{{isShowTip}}" bindtap="closeTip" class="fixed trbl0 zx50" style="background-color: rgba(0,0,0,.8)">
+  <view catch:tap="catchTap" class="bgf rds20r abs zx60 pt50r" style="top:35%;left:70rpx;right:70rpx;">
+    <view class="g7c8094 fs36r mb50r tc b">温馨提示</view>
+    <view class="g7c8094 fs26r mb40r tc">{{content}}</view>
+    <view bindtap="confirm" class="f ac xc fs26r g657da7" style="border-top:1rpx solid #e5e5e5;height:100rpx;">
+      {{sureMsg}}
+    </view>
+  </view>
+</view>
