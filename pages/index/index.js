@@ -1,7 +1,7 @@
 // index.js
 // 获取应用实例
 const app = getApp()
-import { navigateTo, navigateToMiniProgram, showToast, previewImage, getImageInfo, saveImg2Album } from "../../api"
+import { navigateTo, navigateToMiniProgram, makePhoneCall, previewImage } from "../../api"
 Page({
   data: {
   },
@@ -20,6 +20,9 @@ Page({
       showmenu: true, // 是否显示长按菜单
       current: 'https://upload.qianfanyun.com/yjyn/ylyn_hat.png', // 设置默认显示的图片为第二张图片链接
     })
+  },
+  callPhone(){
+    makePhoneCall('0523-83234302')
   },
   async onLoad() {
   }
