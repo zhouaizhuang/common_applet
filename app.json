@@ -6,7 +6,8 @@
     "pages/problem/index",
     "pages/yiqingTotal/index",
     "pages/poster/index",
-    "pages/richText/index"
+    "pages/richText/index",
+    "pages/feedBack/index"
   ],
   "window":{
     "backgroundTextStyle":"light",

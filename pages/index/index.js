@@ -11,6 +11,9 @@ Page({
   goOtherApplet(){
     navigateToMiniProgram({appId: 'wx26e3647f5b46bf93'})
   },
+  goFeedBack(){
+    navigateTo('../feedBack/index')
+  },
   async previewImg(){
     previewImage({
       urls:['https://upload.qianfanyun.com/yjyn/ylyn_index_bg_03.png', 'https://upload.qianfanyun.com/yjyn/ylyn_hat.png'],

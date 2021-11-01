@@ -1,0 +1,25 @@
+<view>
+  <view class="f xc mb50r">
+    <van-button bindtap="loading" class="f ac xc mr50r" type="info">小程序自带loading</van-button>
+    <van-button bindtap="vantLoading" class="f ac xc" type="info">UI组件库loading</van-button>
+  </view>
+  <view wx:if="{{isShowVantLoading}}" class="f xc">
+    <view class="f1 f xc">
+      <van-loading color="#1989fa" size="40px" vertical><text style="color: #1890ff;">加载中...</text></van-loading>
+    </view>
+    <view class="f1 f xc">
+      <van-loading color="#42b260" size="32px" vertical><text>正在加载...</text></van-loading>
+    </view>
+  </view>
+
+  <van-button bindtap="simpleChoose" class="f ac xc mb50r" type="primary">简单选择</van-button>
+
+  <view class="f xc mb50r">
+    <van-button bindtap="showWxModal" class="mr50r" plain type="primary">小程序自带模态框</van-button>
+    <van-button bindtap="showTip"  plain type="primary">自定义弹框</van-button>
+  </view>
+
+
+  <!--=提示框-->
+  <tip isShowTip="{{isShowTip}}" bind:closeTip="closeTip" content="{{content}}"/>
+</view>
