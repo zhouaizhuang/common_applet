@@ -9,6 +9,8 @@
  * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
  */
 
+// 当前图片显示域名为： https://yiluyouni.hlxapps.com/
+
 /**
  * utils函数引入
  **/
@@ -55,11 +57,13 @@ function wxParse(bindName = 'wxParseData', type='html', data='<div class="color:
 function wxParseImgTap(e) {
   var that = this;
   var nowImgUrl = e.target.dataset.src;
+  nowImgUrl = nowImgUrl.replace(/[.][.]\//g, '')
   var tagFrom = e.target.dataset.from;
   if (typeof (tagFrom) != 'undefined' && tagFrom.length > 0) {
+    const from = that.data[tagFrom].imageUrls.map(v => 'https://yiluyouni.hlxapps.com/' + v.replace(/[.][.]\//g, ''))
     wx.previewImage({
       current: nowImgUrl, // 当前显示图片的http链接
-      urls: that.data[tagFrom].imageUrls // 需要预览的图片http链接列表
+      urls: from // 需要预览的图片http链接列表
     })
   }
 }
