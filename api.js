@@ -340,3 +340,37 @@ export const openLocation = function(params = {}){
     })
   })
 }
+// 配置全局分享。根据不同的项目需要从不同的接口获取
+/**
+ * 配置全局分享。根据不同的项目需要从不同的接口获取
+ * 注意分享出去的页面。比如说首页，那么首页必须手动重写分享
+ * 参考一潞有你小程序
+ */
+export const overShare = async function () { // https://www.cnblogs.com/mlzs/p/10894777.html
+  try{
+    const { share_title, share_cover } = await post('/miniapp/common/get-share-config')
+    const { id = '' } = getLocalStorage('userInfo') || {}
+    const path = `/pages/index/index?inviter_id=${id}`
+    const shareInfo = { title: share_title, imageUrl: share_cover, path }
+    setLocalStorage('shareInfo', shareInfo)
+    
+    //监听路由切换、间接实现全局设置分享内容。(!!!!!!备注：用户默认进入index页面。此时页面栈为[]，无法设置分享，因此index页面需要取值shareInfo自定义分享)
+    wx.onAppRoute(res => {
+      //获取加载的页面
+      let pages = getCurrentPages()
+      let view = pages[pages.length - 1]
+      let data = view.data
+      if (view) {
+        // console.log('是否重写分享方法', data.isOverShare);
+        if(!data.isOverShare) {
+          data.isOverShare = true;
+          view.onShareAppMessage = function () {
+            return shareInfo //你的分享配置
+          }
+        }
+      }
+    })
+  } catch(e) {
+    console.log(e)
+  }
+}

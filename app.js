@@ -1,8 +1,9 @@
 // app.js
-import {checkUpdateVersion} from "./api"
+import { overShare, checkUpdateVersion } from "./api"
 App({
   onLaunch() {
-    checkUpdateVersion()
+    // overShare() // 配置全局分享
+    checkUpdateVersion() // 检查更新
   },
   globalData: {
     userInfo: null
