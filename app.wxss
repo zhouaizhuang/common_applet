@@ -1,5 +1,8 @@
 /**app.wxss**/
 .safeDistance{padding-bottom: env(safe-area-inset-bottom);} /*ios底部安全距离*/
+button { all: unset; }
+image {border:0; display:inline-block;} 
+input{-webkit-appearance:none;appearance:none;} /*解决ios输入框默认内阴影*/
 /** 微信小程序，通用css样式库
 * 以下所有样式根据需要可自行扩展，只允许编写常用样式在此文件中。样式名必须简洁，否则class容易出现代码膨胀
 */
