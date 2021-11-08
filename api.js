@@ -374,3 +374,8 @@ export const overShare = async function () { // https://www.cnblogs.com/mlzs/p/1
     console.log(e)
   }
 }
+// 获取页面。传0代表当前页面，传-1代表上一页
+export const getPage = function (index = 0){
+  const pages = getCurrentPages(); // 获取页面栈
+  return pages[pages.length - 1 - index]
+}
