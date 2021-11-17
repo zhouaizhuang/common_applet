@@ -30,7 +30,7 @@
   </view>
 
   <!--2、如果希望将用户头像数据存起来。那么需要告知用户数据用途并让用户授权-->
-  <view class="b fs32r g1890ff mb20r">2、用户手动授权(无法拿到实际数据)</view>
+  <view class="b fs32r g1890ff mb20r">2、用户手动授权(可以拿到实际数据)</view>
   <view class="mb70r" wx:if="{{userInfo == ''}}">
     <button class="fs28r" class="linear4b83f9 gf dib pl30r pr30r rel l50 tx-50" wx:if="{{canIUseGetUserProfile}}" bindtap="getUserData">授权获取头像昵称</button>
     <button wx:elif="{{canIUse}}" class="linear4b83f9 gf dib pl30r pr30r rel l50 tx-50" open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权获取头像昵称</button>
@@ -46,7 +46,7 @@
     <view class="w20">{{userInfo.language}}</view> <!--用户的语言-->
   </view>
   <!--3、获取手机号，需要用户主动点击按钮授权获取-->
-  <view class="b fs32r g1890ff mb20r">3、用户手动授权获取手机号(针对非个人开发者)</view>
+  <view class="b fs32r g1890ff mb20r">3、用户手动授权获取手机号(只针对非个人开发者开放)</view>
   <button class='f xc ac rds15r fs34r linear4b83f9 gf' style='width:420rpx; height:81rpx;' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
     <image style="width:40rpx;height:40rpx;" src="http://pic.crm.hangjiacrm.com/xcx/img/icon_wechat.png" />
     <text>授权登录</text>
