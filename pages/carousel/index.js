@@ -1,16 +1,13 @@
-// pages/interactive/index.js
-import { navigateTo } from "../../api"
+// pages/carousel/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    imageArr: ['https://upload.qianfanyun.com/olympic_invite_friend.png', 'https://upload.qianfanyun.com/olympic_grey_empty_btn.png', 'https://upload.qianfanyun.com/olympic_show_reward.png']
+  },
 
-  },
-  goSwiper(){
-    navigateTo('../carousel/index')
-  },
   /**
    * 生命周期函数--监听页面加载
    */

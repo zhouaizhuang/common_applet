@@ -7,7 +7,8 @@
     "pages/yiqingTotal/index",
     "pages/poster/index",
     "pages/richText/index",
-    "pages/feedBack/index"
+    "pages/feedBack/index",
+    "pages/carousel/index"
   ],
   "window":{
     "backgroundTextStyle":"light",

@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="bgf5" style="min-height:100vh;">
   <view class="f rw b fs32r tc pt30r">
-    <view class="w50 mb50r">组件动效1</view>
+    <view class="w50 mb50r" bindtap="goSwiper">轮播图</view>
     <view class="w50 mb50r">组件动效2</view>
     <view class="w50 mb50r">组件动效3</view>
   </view>

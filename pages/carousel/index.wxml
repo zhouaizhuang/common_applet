@@ -1,0 +1,7 @@
+<view>
+  <swiper autoplay indicator-dots circular easing-function previous-margin="-2rpx" next-margin="-2rpx" indicator-active-color="#06D3EE">
+    <swiper-item wx:for="{{imageArr}}" wx:for-item="item" wx:for-index="index" wx:key="unique">
+      <image src="{{item}}" class="rds15r ovh mb30r" style="width:690rpx;height:276rpx;" bindtap="goApplet" data-id="{{item.id}}"></image>
+    </swiper-item>
+  </swiper>
+</view>

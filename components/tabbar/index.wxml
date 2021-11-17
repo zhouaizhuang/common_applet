@@ -1,6 +1,6 @@
 <view class="f fixed zx20 b0 w100 l0 b" style="background: #fff;border: 1rpx solid #F5F6FA;box-shadow: 0px -5px 20px 0px rgba(234, 236, 241, 0.5);">
   <view bindtap="goIndex" class="f1 f rw ac xc pt20r pb20r">
-    <image src="{{selectTab == 'index'? 'http://r0stwq2aa.bkt.clouddn.com/xcx/scmx_home_light.png' : 'http://r0stwq2aa.bkt.clouddn.com/xcx/scmx_home_grew.png'}}" class="mb10r" style="width:44rpx;height:44rpx;"></image>
+    <image src="{{selectTab == 'index'? 'https://pic.chuangcheng8.com/xcx/scmx_home_light.png' : 'https://pic.chuangcheng8.com/xcx/scmx_home_grew.png'}}" class="mb10r" style="width:44rpx;height:44rpx;"></image>
     <view class="w100 tc fs22r {{ selectTab == 'index' ? 'g2326aa' : 'g7c8094' }}">api使用</view>
   </view>
   <!--
@@ -10,11 +10,11 @@
   </view>
   -->
   <view bindtap="goInteractive" class="f1 f rw ac xc pt20r pb20r">
-    <image src="{{selectTab == 'interactive'? 'http://r0stwq2aa.bkt.clouddn.com/xcx/scmx_home_light.png' : 'http://r0stwq2aa.bkt.clouddn.com/xcx/scmx_home_grew.png'}}" class="mb10r" style="width:44rpx;height:44rpx;"></image>
+    <image src="{{selectTab == 'interactive'? 'https://pic.chuangcheng8.com/xcx/scmx_home_light.png' : 'https://pic.chuangcheng8.com/xcx/scmx_home_grew.png'}}" class="mb10r" style="width:44rpx;height:44rpx;"></image>
     <view class="w100 tc fs22r {{ selectTab == 'index' ? 'g2326aa' : 'g7c8094' }}">组件动效</view>
   </view>
   <view bindtap="goProblem" class="f1 f rw ac xc pt20r pb20r">
-    <image src="{{selectTab == 'problem'? 'http://r0stwq2aa.bkt.clouddn.com/xcx/scmx_smile_light.png' : 'http://r0stwq2aa.bkt.clouddn.com/xcx/scmx_smile_grew.png'}}" class="mb10r" style="width:44rpx;height:44rpx;"></image>
+    <image src="{{selectTab == 'problem'? 'https://pic.chuangcheng8.com/xcx/scmx_smile_light.png' : 'https://pic.chuangcheng8.com/xcx/scmx_smile_grew.png'}}" class="mb10r" style="width:44rpx;height:44rpx;"></image>
     <view class="w100 tc fs22r {{ selectTab == 'mine' ? 'g2326aa' : 'g7c8094' }}">疑难问题</view>
   </view>
 </view>
