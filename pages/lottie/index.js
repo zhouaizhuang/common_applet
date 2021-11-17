@@ -1,5 +1,5 @@
-// pages/interactive/index.js
-import { navigateTo } from "../../api"
+// pages/lottie/index.js
+import lottie from 'lottie-miniprogram'
 Page({
 
   /**
@@ -8,12 +8,7 @@ Page({
   data: {
 
   },
-  goSwiper(){
-    navigateTo('../carousel/index')
-  },
-  goLottie(){
-    navigateTo('../lottie/index')
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -24,8 +19,22 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
+  onReady: async function () {
+    wx.createSelectorQuery().in(this).select('#canvas').node(res => {
+      const canvas = res.node
+      const context = canvas.getContext('2d')
+      canvas.width = 200
+      canvas.height = 200
+      lottie.setup(canvas)
+      lottie.loadAnimation({
+        loop: true,
+        autoplay: true,
+        animationData: require('./lottie.js'),
+        rendererSettings: {
+          context,
+        },
+      })
+    }).exec()
   },
 
   /**

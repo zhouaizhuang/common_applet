@@ -1,0 +1,6 @@
+<view class="fixed ovh zx100 ts0-9" bindtap="getCard" style="right:0rpx;bottom:30%;">
+  <canvas id="canvas" type="2d" style="width: 250rpx; height: 250rpx;"></canvas>
+  <view class="rds40r pt8r pb8r fs28r b gf gf f ac xc abs zx10 l50 tx-50 nowrap" style="width:170rpx;bottom:30rpx;background-color: #F55644;">
+    <image src="https://upload.qianfanyun.com/olympic_me_card.png" class="db" style="width:112rpx;height:42rpx;"/><text class="fs24r" wx:if="{{card_num > 0}}"> x{{card_num}}</text>
+  </view>
+</view>

@@ -4,7 +4,8 @@
   "description": "存放小程序demo",
   "main": ".eslintrc.js",
   "dependencies": {
-    "@vant/weapp": "^1.9.2"
+    "@vant/weapp": "^1.9.2",
+    "lottie-miniprogram": "^1.0.12"
   },
   "devDependencies": {},
   "scripts": {

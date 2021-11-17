@@ -8,7 +8,8 @@
     "pages/poster/index",
     "pages/richText/index",
     "pages/feedBack/index",
-    "pages/carousel/index"
+    "pages/carousel/index",
+    "pages/lottie/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
