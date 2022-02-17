@@ -126,7 +126,7 @@ input{-webkit-appearance:none;appearance:none;} /*解决ios输入框默认内阴
 /* 边框圆角 */
 .rds1r{border-radius:1rpx;}   .rds2r{border-radius:2rpx;}  .rds5r{border-radius:5rpx;}    .rds10r{border-radius:10rpx;}  .rds15r{border-radius:15rpx;}  .rds20r{border-radius:20rpx;}  .rds30r{border-radius:30rpx;} .rds40r{border-radius:40rpx;}  .rds50r{border-radius:50rpx;}  .rds50{border-radius:50%;}
 /* 表单必填*号 */
-.require::before{ content: '*';display: inline-block;margin-right: 4rpx;line-height: 1;font-family: SimSun;font-size: 14rpx;color: #ed4014}
+.need::before{ content: '*';display: inline-block;margin-right: 4rpx;line-height: 1;font-family: SimSun;font-size: 30rpx;color: #ed4014}
 /* 微信小程序按钮去除默认样式 */
 button::after {border: none;}
 button{padding:0;}
