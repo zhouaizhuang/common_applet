@@ -6,6 +6,7 @@
 export const isType = type => val => type === Object.prototype.toString.call(val).slice(8, -1)
 export const isArray = isType('Array')
 export const isObject = isType('Object')
+export const isReference = val => isArray(val) || isObject(val)
 export const isNull = isType('Null')
 export const isUndefined = isType('Undefined')
 export const isFunction = isType('Function')
@@ -16,25 +17,19 @@ export const isDate = isType('Date')
 export const isError = isType('Error')
 export const isGt0 = val => /^\+?[1-9][0-9]*$/.test(val) // 是否是大于0的整数
 export const isGtEq0 = val => /^\+?[1-9][0-9]*$/.test(val) || String(val) === '0' // 是否是大于等于0的整数
-export const isPhoneNum = val => /^1[3456789]\d{9}$/.test(val) // 检测是否是手机号码
-// 执行此函数，或导致函数执行阻塞在此处t毫秒
+// 执行此函数，可以做一个延时功能。在需要延时执行一段逻辑的时候可以使用
 // 举例子: await wait(500);   那么程序会在此处阻塞等待500ms
-export const wait = async function(t) {
-  return new Promise(resolve => setTimeout(() => resolve(), t))
-}
+export const wait = t => new Promise(resolve => setTimeout(() => resolve(), t))
 /**
  * 深拷贝
- * @param {*} obj 传入任意类型都可以做深拷贝 
+ * @param {*} obj 传入任意类型都可以做深拷贝
  * @returns 返回深拷贝的数据
  * @举例子 const obj = {name:'a', age:'18'};  deepCopy(obj) ----> {name:'a', age:'18'}
  */
 export const deepCopy = function (obj) {
-  if(!(isArray(obj) || isObject(obj))) { return obj }  // 数字、日期、正则、函数、字符串、undefined、null、Symbol直接返回
+  if(!isReference(obj)) { return obj }  // 数字、日期、正则、函数、字符串、undefined、null、Symbol直接返回
   let res = isArray(obj) ? [] : {}
-  return Object.keys(obj).reduce((prev, item) => {
-    prev[item] = (isArray(obj[item]) || isObject(obj[item])) ? deepCopy(obj[item]) : obj[item]
-    return prev
-  }, res)
+  return Object.keys(obj).reduce((prev, item) => (prev[item] = isReference(obj[item]) ? deepCopy(obj[item]) : obj[item], prev), res)
 }
 /**
  * 获取唯一ID。用于模板渲染的唯一key值
@@ -112,48 +107,30 @@ export const toObject = function (arr) {
   }
   return res
 }
-// 检测是否大致相等
-// looseEqual(1,'1') ===> true
-// looseEqual({name:'zaz'},{'name':'zaz'}) ===> true
-export const looseEqual = function (a, b) {
-  if (a === b) { return true }
-  var isObjectA = isObject(a)
-  var isObjectB = isObject(b)
-  if (isObjectA && isObjectB) {
-    try {
-      var isArrayA = isArray(a)
-      var isArrayB = isArray(b)
-      if (isArrayA && isArrayB) {
-        return a.length === b.length && a.every(function (e, i) {
-          return looseEqual(e, b[i])
-        })
-      } else if (a instanceof Date && b instanceof Date) {
-        return a.getTime() === b.getTime()
-      } else if (!isArrayA && !isArrayB) {
-        var keysA = Object.keys(a)
-        var keysB = Object.keys(b)
-        return keysA.length === keysB.length && keysA.every(function (key) {
-          return looseEqual(a[key], b[key])
-        })
-      } else {
-        return false
-      }
-    } catch (e) {
-      return false
-    }
-  } else if (!isObjectA && !isObjectB) {
-    return String(a) === String(b)
-  } else {
-    return false
-  }
-}
-// 获取进近似相等的val值，在数组arr中的位置。没找到相似的返回-1
-// looseIndexOf([{name:'zaz'}], {name:'zaz'})  ===> 0
-export const looseIndexOf = function (arr, val) {
-  for (var i = 0; i < arr.length; i++) {
-    if (looseEqual(arr[i], val)) { return i }
-  }
-  return -1
+/**
+ * 扁平数组转对象tree树形结构
+ * https://juejin.cn/post/6983904373508145189#heading-8
+ * @param {Array} arr 需要转换的数组
+ * @returns {Array} 转换之后的数组
+ * @举例 
+ * let arr = [{id: 1, name: '部门1', pid: 0},{id: 2, name: '部门2', pid: 1},{id: 3, name: '部门3', pid: 1},{id: 4, name: '部门4', pid: 3},{id: 5, name: '部门5', pid: 4}]
+ * arrayToTree(arr) ==> 
+ * [{
+    "id": 1,
+    "name": "部门1",
+    "pid": 0,
+    "children": [ { "id": 2, "name": "部门2", "pid": 1, "children": [] }, { "id": 3, "name": "部门3", "pid": 1, "children": [{...},{...}] } ]
+   }]
+ */
+export const array2Tree = function (arr) {
+  const itemMap = arr.reduce((prev, item) => (prev[item.id] = { ...item, children: [] }, prev), {})
+  return arr.reduce((prev, item) => {
+    const { id, pid } = item
+    const curItem = itemMap[id]
+    itemMap[pid] = itemMap[pid] || { children: [] } // 防止有的pid不存在
+    pid === 0 ? prev.push(curItem) : itemMap[pid].children.push(curItem)
+    return prev
+  }, [])
 }
 // 一次性函数。只执行一次。后面再调用,没有任何函数内代码执行
 // 示例：const aa = once(function (a, b){console.log(a + b)})
@@ -320,13 +297,21 @@ export const formatJSON = function (obj) {
 export const checkJSON = function (obj) {
   return Object.keys(obj).find(item => !Boolean(obj[item])) || ''
 }
-// JSON转url
-// 举例子： JSON2url('../advise/index', { from: 'index', id_str:'1243' }) -----> '../advise/index?from=index&id_str=1243'
+/**
+ * JSON转url（这个函数将数据进行了编码。将来再解码使用。可以规避一些特殊字符产生的bug）
+ * 函数还兼容传入 {info: {name:'zz', age:18}, school: 'qinghua'} 这种复杂的数据。之后通过url2JSON可以完美解析
+ * @param {String} url 跳转地址的域名。在小程序中那就是路径
+ * @param {Object} params 跳转地址中药传递的参数的json格式
+ * @returns {String} 返回拼接好的带有参数的链接地址
+ * @举例子 JSON2url('../advise/index', { from: 'index', id_str:'1243' }) -----> '../advise/index?from=index&id_str=1243'
+ */
 export const JSON2url = function (url = '', params = {}){
-  return Object.keys(formatJSON(params)).reduce((prev, item) => prev + (prev.includes('?') ? '&' : '?') + `${item}=${encodeURIComponent(params[item])}`, url) || ''
+  return Object.keys(formatJSON(params)).reduce((prev, item) => prev + (prev.includes('?') ? '&' : '?') + `${item}=${encodeURIComponent(JSON.stringify(params[item]))}`, url) || ''
 }
 /**
- * url转JSON
+ * url转JSON(函数内与解码操作，与JSON2url相对应)
+ * @param {String} url 传入带有参数的url链接地址
+ * @returns {Object} 返回参数拼接的json对象
  * @举例 url2JSON('http://www.baidu.com?name=asd&age=12') ----> {name: "asd", age: "12"}
  */
 export const url2JSON = function (url = '') {
@@ -334,9 +319,45 @@ export const url2JSON = function (url = '') {
   paramsStr = paramsStr.split('#')[0] || '' // 防止一些url中混入#号放在?号之后，此处做一个适配
   return paramsStr.split('&').reduce((prev, item) => {
     const [key, val] = item.split('=')
-    return { ...prev, [key]: decodeURIComponent(val) } // 此处需要转码，否则中文和一些特殊字符就无法支持了
+    return { ...prev, [key]: JSON.parse(decodeURIComponent(val)) } // 此处需要转码，否则中文和一些特殊字符就无法支持了
   }, {})
 }
+/**
+ * 将数组中的数据进行分类，分类成JSON。键名为类别名称，键值为数组，存放数据集合
+ * @param {Array} arr 需要分类的数组
+ * @param {Function} callback 分类函数
+ * @举例子 
+ * const arr = [{name: 'asd', score: 100}, {name: '3dd', score: 60}, {name: 'dfg', score: 80}, {name: 'zrr', score: 90}]
+ * groupBy(arr, item => {
+ *   const { score } = item
+ *   return score < 65 ? 'E' :
+ *          score < 70 ? 'D' :
+ *          score < 80 ? 'C' :  
+ *          score < 90 ? 'B' : 'A';
+ *   })
+ * }
+ * @result 根据分类函数分类好的结果：{A: [{...},{...}], B: [{...}], C: [{...}], D: [{...}]}
+ */
+ export const groupBy = function (arr, callback){
+  return arr.reduce((prev, item) => {
+    const key = callback(item)
+    ;(prev[key] || (prev[key] = [])).push(item)
+    return prev
+  }, {})
+}
+/**
+ * 将后台数据同步过来
+ * 场景举例：比如表单编辑的时候，用户之前有一些是选中状态的，但是查到的列表没这个状态，你只知道哪些id是选中的。那么就需要做同步。将列表数据中特定id的条目进行字段更新
+ * @param {Array} arr 列表数据
+ * @param {String || Array} ids 需要更新的id集合
+ * @param {String} key 更新的键值
+ * @param {*} val 目标id更新之后的值
+ * @param {*} defVal 非目标id更新之后的值
+ * @returns {Array}
+ * 举例 syncBgData([{id:'1'}, {id:'2'}, {id:'3'}], '2,3')
+ * [{id:'1', isChecked:false}, {id:'2', isChecked:true}, {id:'3', isChecked:true}]
+ */
+export const syncBgData = (arr, ids, key = 'isChecked', val = true, defVal = false) => arr.map(v => (v[key] = ids.includes(v.id) ? val : defVal, v))
 /**
  * 返回一个lower - upper之间的随机数
  * @param lower 下限
@@ -355,6 +376,14 @@ export const random = function (lower, upper, type = 'float') {
   let res = Math.random() * (upper - lower) + lower
   if(type !== 'float') { res = round(res) }
   return res
+}
+/**
+ * 获取随机颜色
+ * @returns 
+ */
+ export const randomColor = function () {
+  const [r, g, b, a] = [random(0, 255,'int'), random(0, 255,'int'), random(0, 255,'int'), 1]
+  return `rgba(${r}, ${g}, ${b}, ${a})`
 }
 // 禁止复制
 /*
@@ -550,6 +579,28 @@ export const afterNsecond = function (after = 60) {
   const ms = addZero(Math.floor(leftMs % 1000), 2)
   return { d, h, m, s, ms }
 }
+/**
+ * 根据年和月，得出该年月有多少天。（原理：计算出他的下个月， 用它的下个月生成毫秒数-当前月毫秒数再除以一天的毫秒数===天数）
+ * @param {String} whichYear 
+ * @param {String} whichMonth 
+ * @returns 
+ * @举例子 getDays(2021, 11) ---> 30
+ */
+ export const getDays = function(whichYear, whichMonth) {
+  let nextMoth = Number(whichMonth) + 1
+  let nextYear = Number(whichYear)
+  if (nextMoth === 13) {
+    nextMoth = 1
+    nextYear++
+  }
+  let theCurrentDate = whichYear + '-' + whichMonth + '-1'
+  let theNextDate = nextYear + '-' + nextMoth + '-1'
+  let yearObjOne = new Date(theCurrentDate)
+  let yearObjTwo = new Date(theNextDate)
+  let milliseconds = yearObjTwo.getTime() - yearObjOne.getTime()
+  let daymilliseconds = 3600 * 24 * 1000
+  return (milliseconds / daymilliseconds)
+}
 /*
 **********************************************************************************************
 ******************************************正则校验*********************************************
@@ -564,20 +615,23 @@ export const afterNsecond = function (after = 60) {
 
 /*
 **********************************************************************************************
-******************************************数据结构*********************************************
+******************************************业务函数*********************************************
 **********************************************************************************************
 */
- /**
+/**
  * 逆转对象。
  * @举例子 invert({ 'a': 1, 'b': 2, 'c': 1 }) -----> {1: 'c', 2: 'b'}
  * @param {*} obj 需要逆转的对象
  * @returns 
  */
-  export const invert = obj => Object.keys(obj).reduce((prev, item) => ((prev[obj[item]] = item), prev), {})
-  /**
-   * 逆转对象。并且重复的键，将对应的值存在一起
-   * @举例子 invertBy({ 'a': 1, 'b': 2, 'c': 1 }) -----> {1: ['a', 'c'], 2: ['b']}
-   * @param {*} obj 需要逆转并且分类的对象
-   * @returns 
-   */
-  export const invertBy = obj => Object.keys(obj).reduce((prev, item) => ((prev[obj[item]] || (prev[obj[item]] = [])).push(item), prev), {})
+ export const invert = obj => Object.keys(obj).reduce((prev, item) => ((prev[obj[item]] = item), prev), {})
+ /**
+  * 逆转对象。并且重复的键，将对应的值存在一起
+  * @举例子 invertBy({ 'a': 1, 'b': 2, 'c': 1 }) -----> {1: ['a', 'c'], 2: ['b']}
+  * @param {*} obj 需要逆转并且分类的对象
+  * @returns
+  */
+ export const invertBy = obj => Object.keys(obj).reduce((prev, item) => ((prev[obj[item]] || (prev[obj[item]] = [])).push(item), prev), {})
+/**
+ * 链表
+ */
