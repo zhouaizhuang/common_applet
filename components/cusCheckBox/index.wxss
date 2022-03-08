@@ -1,0 +1,17 @@
+/* components/cusCheckBox/cusCheckBox.wxss */
+.checked{
+  background: rgba(199, 163, 93, 0.1);
+  border: 1px solid #C7A35D;
+  color:#C58E24;
+  font-weight:weight;
+}
+.notChecked{
+  border: 1rpx solid #CFCFCF;
+  color: #999;
+}
+.value-class {
+  flex: none !important;
+}
+.g42b260{
+  color: #42b260;
+}

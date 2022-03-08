@@ -1,0 +1,17 @@
+<view class="pt25r pb25r fs32r">
+  <view class="pb25r fs32r g2 mr10r {{formInfo.required == 1 ? 'need' : ''}}">{{formInfo.name}}</view>
+  <view class="f rw xb">
+    <view wx:for="{{uploadArrRes}}" wx:for-item="item" wx:for-index="index" wx:key="unique"  class="rel mb20r">
+      <image bindtap="previewItem" data-index="{{index}}" src="{{item.url}}" class="" style="width:180rpx;height:180rpx;" />
+      <view wx:if="{{type != 'detail'}}" catch:tap="delIdentity" data-url="{{item.url}}" class="abs rds50 zx2 f ac xc op6" style="top:10rpx;right:10rpx;transform:translateX(-50%) rotate(45deg);width:60rpx;height:60rpx;background:#000;">
+        <view class="abs l50 tx-50 bgf rds10r" style="width:60%;height:4rpx;"></view>
+        <view class="ass l50 tx-50 bgf rds10r" style="width:4rpx;height:60%;"></view>
+      </view>
+    </view>
+    <view wx:if="{{uploadArrRes.length < formInfo.count}}" bindtap="selectImg" class="f ac xc mb20r" style="width:180rpx;height:180rpx;background:#E2E2E2;">
+      <image src="https://upload.qianfanyun.com/ylyn/ylyn_camera.png" style="width:57rpx;height:48rpx;" />
+    </view>
+    <view style="width:180rpx;height:0rpx;"></view>
+    <view style="width:180rpx;height:0rpx;"></view>
+  </view>
+</view>

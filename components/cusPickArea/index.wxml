@@ -1,0 +1,8 @@
+<view class="f ac pt25r pb25r fs32r">
+  <view class="g2 mr10r {{formInfo.required == 1 ? 'need' : ''}}">{{formInfo.name}}</view>
+  <view class="f1 tr fs30r">
+    <picker mode="region" bindchange="bindRegionChange" disabled="{{type == 'detail'}}" value="{{region}}" custom-item="{{customItem}}">
+      <input class="f1 tr fs30r" type="text" value="{{formInfo.defaultValue}}" disabled placeholder="请选择地区" placeholder-class="g9 tr fs30r" />
+    </picker>
+  </view>
+</view>

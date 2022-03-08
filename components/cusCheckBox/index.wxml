@@ -1,0 +1,27 @@
+<view class="f ac pt25r pb25r fs32r">
+  <view class="g2 mr10r {{formInfo.required == 1 ? 'need' : ''}}">{{formInfo.name}}</view>
+  <input class="f1 tr fs30r" type="text" value="{{formInfo.defaultValue}}" bindtap="{{type == 'detail' ? '' : 'showCheckBox'}}" disabled placeholder="请选择" placeholder-class="g9 tr fs30r" />
+</view>
+
+<view
+  class="fixed trbl0 trans3 {{isShowCheckBox ? 'op10 zx20' : 'op0 zx-1'}}"
+  style="background-color: rgba(0, 0, 0, .7);"
+  bindtap="onClose"
+>
+  <view class="trans3 abs w100 b0 bgf" style="height:{{200 * options.length}}rpx; transform: {{isShowCheckBox ? 'translateY(0);' : 'translateY(100%);'}}max-height: 60vh;border-radius:20rpx 20rpx 0 0;" catchtap='catchTask'>
+    <image src="https://upload.qianfanyun.com/og_close_x.png" class="abs zx10" style="right:20rpx;top:-100rpx;width:70rpx;height:70rpx;" bindtap="onClose"></image>
+    <view class="abs trbl0 ovya ovsb-contain" style="top:40rpx">
+      <view bindtap="changeField" data-item="{{item}}" wx:for="{{options}}" wx:for-item="item" wx:for-index="index" wx:key="unique">
+        <view class="pt24r pb24r bdbe5 f ac pl28r pr28r {{item.isChecked ? 'bgfbf8f3 gc7a35d' : ''}}">
+          <view class="f1">{{item.name}}</view>
+          <view class="rds10r rel f ac xc {{item.isChecked ? 'bgc7a35d' : 'bge6' }}" style="width:40rpx;height:40rpx;">
+            <image style="width:26rpx;height:16rpx;" src="https://upload.qianfanyun.com/yjyn/ylyn_arrow_grew.png"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+

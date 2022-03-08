@@ -1,0 +1,4 @@
+<view class="f ac pt25r pb25r fs32r">
+  <view class="g2 mr10r {{formInfo.required == 1 ? 'need' : ''}}">{{formInfo.name}}</view>
+  <input class="f1 tr fs30r" type="text" value="{{village.name}}" bindtap="{{type == 'detail' ? '' : 'goSelectVillage'}}" disabled placeholder="请选择" placeholder-class="g9 tr fs30r" />
+</view>
