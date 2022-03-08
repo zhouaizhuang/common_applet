@@ -1,0 +1,43 @@
+<view class="pl30r pr30r" style="min-height:100vh;background:#FBF8F3;padding-bottom:180rpx;">
+  <view wx:if="{{affairs.status == 100 && affairs.reason}}" class="gff0000 fs30r mb20r">{{affairs.reason}}</view>
+  <view wx:if="{{affairs.status == 0}}" class="gfca000 fs30r mb20r tc">审核中！</view>
+  <!--自定义表单-->
+  <view wx:for="{{cusForm}}" wx:for-item="bigItem" wx:for-index="bigIndex" wx:key="unique">
+    <view class="pb20r pt20r fs30r b ">{{bigItem.name}}</view>
+    <view class="bgf rds20r pl20r pr20r" style="box-shadow: 0px 8rpx 15rpx rgba(143, 143, 143, 0.1);">
+      <view wx:for="{{bigItem.child}}" wx:for-item="item" wx:for-index="index" wx:key="unique" class="{{bigItem.child.length === index + 1 ? '' : 'bdbe5'}}">
+        <!--自定义input文本输入框-->
+        <cusInput wx:if="{{item.type == 'text'}}" formInfo="{{item}}" type="{{options.type}}" bind:changeValue="changeValue" />
+        <!--自定义textarea多行文本-->
+        <cusTextArea wx:elif="{{item.type == 'textarea'}}" formInfo="{{item}}" type="{{options.type}}" bind:changeValue="changeValue" />
+        <!--自定义radio单选框-->
+        <cusRadio wx:elif="{{item.type == 'radio'}}" formInfo="{{item}}" type="{{options.type}}" bind:changeValue="changeValue" />
+        <!--自定义checkbox复选框-->
+        <cusCheckBox wx:elif="{{item.type == 'checkbox'}}" formInfo="{{item}}" type="{{options.type}}" bind:changeValue="changeValue" />
+        <!--自定义area地区选择-->
+        <cusPickArea wx:elif="{{item.type == 'area'}}" formInfo="{{item}}" type="{{options.type}}" bind:changeValue="changeValue" />
+        <!--自定义date日期选择-->
+        <cusPickDate wx:elif="{{item.type == 'date'}}" formInfo="{{item}}" type="{{options.type}}" bind:changeValue="changeValue" />
+        <!--自定义datetime时间日期选择-->
+        <cusPickDateTime wx:elif="{{item.type == 'datetime'}}" formInfo="{{item}}" type="{{options.type}}" bind:changeValue="changeValue" />
+        <!--自定义select选择器-->
+        <cusSelect wx:elif="{{item.type == 'select'}}" formInfo="{{item}}" type="{{options.type}}" bind:changeValue="changeValue" />
+        <!--自定义person用户身份证-->
+        <cusIdentity wx:elif="{{item.type == 'person'}}" formInfo="{{item}}" type="{{options.type}}" bind:changeValue="changeValue" />
+        <!--自定义village小区选择-->
+        <cusVillage wx:elif="{{item.type == 'village'}}" village="{{village}}" formInfo="{{item}}" type="{{options.type}}" bind:changeValue="changeValue" />
+        <!--自定义affairs事务选择-->
+        <cusAffairs wx:elif="{{item.type == 'affairs'}}" serviceItem="{{serviceItem}}" formInfo="{{item}}" type="{{options.type}}" bind:changeValue="changeValue" />
+        <!--自定义image单图上传-->
+        <cusUploadImg wx:elif="{{item.type == 'image'}}" formInfo="{{item}}" type="{{options.type}}" bind:changeValue="changeValue" />
+        <!--自定义images多图上传-->
+        <cusUploadImgs wx:elif="{{item.type == 'images'}}" formInfo="{{item}}" type="{{options.type}}" bind:changeValue="changeValue" /> 
+      </view>
+    </view>
+  </view>
+  <!--提交按钮-->
+  <view wx:if="{{options.type != 'detail'}}" class="fixed b0 l0 r0 bgf pt35r pl22r pr22r pb22r zx10">
+    <view bindtap="saveForm" class="pt21r pb21r bgc7a35d gf fs34r b f ac xc" style="border-radius:45rpx;">提交</view>
+  </view>
+</view>
+<van-notify id="van-notify" />

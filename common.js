@@ -17,6 +17,8 @@ export const isDate = isType('Date')
 export const isError = isType('Error')
 export const isGt0 = val => /^\+?[1-9][0-9]*$/.test(val) // 是否是大于0的整数
 export const isGtEq0 = val => /^\+?[1-9][0-9]*$/.test(val) || String(val) === '0' // 是否是大于等于0的整数
+export const isIdentity = val => /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/.test(val) // 身份证 321281155121152489
+export const isEmail = val => /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(val)
 // 执行此函数，可以做一个延时功能。在需要延时执行一段逻辑的时候可以使用
 // 举例子: await wait(500);   那么程序会在此处阻塞等待500ms
 export const wait = t => new Promise(resolve => setTimeout(() => resolve(), t))
@@ -547,7 +549,7 @@ export const socketTime = function (t = new Date()) {
  * @举例 dateFormater('YYYYMMDD-hh:mm:ss', '2020-08-12 09:13:54') ==> 20200812-09:13:54
 */
 export const dateFormater = function (formater, t = new Date()){
-  if(!isDate(t)) { t = t.replace(/[-]/g, "/") }
+  if(!isDate(t) && isString(t)) { t = t.replace(/[-]/g, "/") }
   const dt = new Date(t)
   const [Y, M, D, h, m, s] = [dt.getFullYear() + '', dt.getMonth() + 1, dt.getDate(), dt.getHours(), dt.getMinutes(), dt.getSeconds()]
   return formater.replace(/YYYY|yyyy/g, Y)

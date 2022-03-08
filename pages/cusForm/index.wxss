@@ -1,0 +1,4 @@
+/* pages/onlineProcess/index.wxss */
+.dateTime .van-picker__confirm {
+  color: #42b260 !important;
+}

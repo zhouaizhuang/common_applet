@@ -1,0 +1,19 @@
+{
+  "usingComponents": {
+    "cusInput": "../../components/cusInput/index",
+    "cusTextArea": "../../components/cusTextArea/index",
+    "cusRadio": "../../components/cusRadio/index",
+    "cusCheckBox": "../../components/cusCheckBox/index",
+    "cusPickArea": "../../components/cusPickArea/index",
+    "cusPickDate": "../../components/cusPickDate/index",
+    "cusPickDateTime": "../../components/cusPickDateTime/index",
+    "cusSelect": "../../components/cusSelect/index",
+    "cusIdentity": "../../components/cusIdentity/index",
+    "cusUploadImg": "../../components/cusUploadImg/index",
+    "cusUploadImgs": "../../components/cusUploadImgs/index",
+    "cusVillage": "../../components/cusVillage/index",
+    "cusAffairs": "../../components/cusAffairs/index",
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+    "van-notify": "@vant/weapp/notify/index"
+  }
+}

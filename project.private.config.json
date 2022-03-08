@@ -13,14 +13,20 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/userInfo/index",
+          "name": "用户信息",
           "pathName": "pages/userInfo/index",
           "query": "",
           "scene": null
         },
         {
-          "name": "pages/feedBack/index",
+          "name": "交互反馈",
           "pathName": "pages/feedBack/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "自定义表单",
+          "pathName": "pages/cusForm/index",
           "query": "",
           "scene": null
         }

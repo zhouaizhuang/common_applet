@@ -1,4 +1,4 @@
-/**app.wxss**/
+.box-sizing{box-sizing: border-box;}
 .safeDistance{padding-bottom: env(safe-area-inset-bottom);} /*ios底部安全距离*/
 button { all: unset; }
 image {border:0; display:inline-block;} 
@@ -30,8 +30,8 @@ input{-webkit-appearance:none;appearance:none;} /*解决ios输入框默认内阴
 .pl1r{padding-left:1rpx;}   .pl2r{padding-left:2rpx;}   .pl3r{padding-left:3rpx;}   .pl4r{padding-left:4rpx;}   .pl5r{padding-left:5rpx;}   .pl6r{padding-left:6rpx;}   .pl7r{padding-left:7rpx;}   .pl8r{padding-left:8rpx;}   .pl9r{padding-left:9rpx;}   .pl10r{padding-left:10rpx;}   .pl11r{padding-left:11rpx;}   .pl12r{padding-left:12rpx;}   .pl13r{padding-left:13rpx;}   .pl14r{padding-left:14rpx;}   .pl15r{padding-left:15rpx;}   .pl16r{padding-left:16rpx;}   .pl17r{padding-left:17rpx;}   .pl18r{padding-left:18rpx;}   .pl19r{padding-left:19rpx;}    .pl20r{padding-left:20rpx;}   .pl21r{padding-left:21rpx;}   .pl22r{padding-left:22rpx;}   .pl23r{padding-left:23rpx;}   .pl24r{padding-left:24rpx;}   .pl25r{padding-left:25rpx;}   .pl26r{padding-left:26rpx;}   .pl27r{padding-left:27rpx;}   .pl28r{padding-left:28rpx;}   .pl29r{padding-left:29rpx;}   .pl30r{padding-left:30rpx;}    .pl35r{padding-left:35rpx;}   .pl40r{padding-left:40rpx;}   .pl45r{padding-left:45rpx;}   .pl50r{padding-left:50rpx;} .pl60r{padding-left:60rpx;} .pl70r{padding-left:70rpx;} .pl80r{padding-left:80rpx;} .pl90r{padding-left:90rpx;} .pl100r{padding-left:100rpx;}
 /* 边框、外线为0 */
 .bd{border:1rpx solid;} .bd0{border:0; outline:none;}
-.bdc{border: 1rpx solid #ccc;}
-.bdbe{border-bottom: 1rpx solid #eee;}
+.bdc{border: 1rpx solid #ccc;} .bde{border: 1rpx solid #eee;} .bdf5{border: 1rpx solid #f5f5f5;} .bde5{border: 1rpx solid #e5e5e5;}
+.bdbc{border-bottom: 1rpx solid #ccc;} .bdbe{border-bottom: 1rpx solid #eee;}
 .bdbe5{border-bottom: 1rpx solid #e5e5e5;} .bdbf5{border-bottom: 1rpx solid #f5f5f5;}
 /* 背景色 */
 .bgf{background-color: #fff;} .bgf5{background-color:#f5f5f5;} .bgecf2ff{background-color: #ecf2ff;} .bgff5650{background-color: #ff5650;}
@@ -39,11 +39,12 @@ input{-webkit-appearance:none;appearance:none;} /*解决ios输入框默认内阴
 .imgBg{width:100%;margin:-0.1rem 0;background-repeat:no-repeat;background-size:100%;} .bgb17540{background-color:#b17540;} .bge6{background-color:#e6e6e6;}
 .linear4b83f9{background: linear-gradient(to right,#4b83f9,#68a5e2);}
 /*遮罩层*/
-.mask6{position:fixed;top:0;right:0;bottom:0;left:0;z-index:100;background-color: rgba(0, 0, 0, .6);overflow:hidden;}
+.mask6{position:fixed;top:0;right:0;bottom:0;left:0;background-color: rgba(0, 0, 0, .6);overflow:hidden;}
 /* 字体颜色 */
-.g2{color: #222;} .g6{color: #666;} .g9{color:#999;} .g3e{color:#3e3e3e;} .gb3{color:#b3b3b3;} .gd9{color: #d9d9d9;} .gf{color: #fff;} .gc48435{color:#C48435;} .g929292{color:#929292;}
+.g2{color: #222;} .g3{color: #333;}  .g6{color: #666;} .g9{color:#999;} .g3e{color:#3e3e3e;} .gb3{color:#b3b3b3;} .gd9{color: #d9d9d9;} .gf{color: #fff;} .gc48435{color:#C48435;} .g929292{color:#929292;}
 .g5b290a{color:#5b290a;} .gb3896a{color:#b3896a;} .g774f38{color:#774f38;} .g657da7{color: #657da7;} .gf10101{color: #f10101;} .gc7a35d{color: #c7a35d;} .gff0000{color: #ff0000;}
-.gdc1001{color: #dd1001;} .g42b260{color:#42b260;} .gf18112{color: #f18112;} .gff503f{color: #ff503f;}
+.gdc1001{color: #dd1001;} .g42b260{color:#42b260;} .gf18112{color: #f18112;} .gff503f{color: #ff503f;} .g300202{color:#300202;} .gfca000{color:#fca000;} .g66ac5e{color:#66ac5e;} .gb91c1c{color: #b91c1c;}
+.ga17012{color: #a17012;}
 /*光标颜色*/
 .caret-g1890ff{caret-color:#1890ff;}
 /* BFC */
@@ -67,8 +68,10 @@ input{-webkit-appearance:none;appearance:none;} /*解决ios输入框默认内阴
 .tl{text-align: left;} .tc{text-align: center;} .tr{text-align: right;}  .tj{text-align: justify;}
 /* 文本修饰 */
 .tdo{text-decoration: overline;} .tdl{text-decoration: line-through;} .tdu{text-decoration: underline;} .tdb{text-decoration: blink;}
+/* 首行缩进 */
+.ti1{text-indent: 1em} .ti1-5{text-indent: 1.5em} .ti2{text-indent: 2em}
 /* 文字间距 */
-.lt2r{letter-spacing: 2rpx;} .lt5r{letter-spacing: 5rpx;} .lt10r{letter-spacing: 10rpx;}
+.lt2r{letter-spacing: 2rpx;} .lt5r{letter-spacing: 5rpx;} .lt8r{letter-spacing:8rpx;} .lt10r{letter-spacing: 10rpx;}
 /* 字体大小 */
 .fs0{font-size:0;} .fs12r{font-size:12rpx;} .fs13r{font-size:13rpx;} .fs14r{font-size:14rpx;} .fs15r{font-size:15rpx;} .fs16r{font-size:16rpx;} .fs17r{font-size:17rpx;} .fs18r{font-size:18rpx;} .fs19r{font-size:19rpx;} .fs20r{font-size:20rpx;}
 .fs21r{font-size:21rpx;} .fs22r{font-size:22rpx;} .fs23r{font-size:23rpx;} .fs24r{font-size:24rpx;} .fs25r{font-size:25rpx;} .fs26r{font-size:26rpx;} .fs27r{font-size:18rpx;} .fs28r{font-size:28rpx;} .fs29r{font-size:29rpx;} .fs30r{font-size:30rpx;}

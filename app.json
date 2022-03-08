@@ -9,7 +9,8 @@
     "pages/richText/index",
     "pages/feedBack/index",
     "pages/carousel/index",
-    "pages/lottie/index"
+    "pages/lottie/index",
+    "pages/cusForm/index"
   ],
   "window":{
     "backgroundTextStyle":"light",

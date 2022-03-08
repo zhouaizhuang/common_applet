@@ -4,6 +4,7 @@
     <view bindtap="goYQ" class="w50 pt30r pb20r">jsonp使用方法</view>
     <view bindtap="goPoster" class="w50 pt30r pb20r">小程序分享海报</view>
     <view bindtap="goRichText" class="w50 pt20r pb20r">小程序渲染富文本</view>
+    <view bindtap="goCusForm" class="w50 pt20r pb20r">自定义表单</view>
   </view>
   <tabbar selectTab="problem"></tabbar>
 </view>

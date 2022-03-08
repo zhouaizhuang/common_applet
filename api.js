@@ -1,3 +1,4 @@
+import { BaseHost } from "./utils/network.js"
 /* 小程序公用js代码 */
 // 获取微信信息
 export const getUserProfile = function (options = {}) {
@@ -374,8 +375,78 @@ export const overShare = async function () { // https://www.cnblogs.com/mlzs/p/1
     console.log(e)
   }
 }
+// 选择图片
+export const chooseImage = function (params){
+  return new Promise((resolve, reject) => {
+    wx.chooseImage({
+      count: 2,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+      success: res => resolve(res),
+      reject: err => reject(err),
+      ...params
+    })
+  })
+}
+// 上传图片
+export const uploadFile = function (params = {}){
+  const localToken = getLocalStorage('token') || '' // 本地的token
+  return new Promise((resolve, reject) => {
+    wx.uploadFile({
+      url: `${BaseHost}/miniapp/common/upload-img`,
+      name: 'image',
+      filePath: '',
+      header: {
+        "Content-Type": "multipart/form-data",
+        "Authorization": 'Bearer ' + localToken
+      },
+      formData: {},
+      success: res => {
+        const newRes = JSON.parse(res.data)
+        resolve(newRes.data)
+      },
+      reject: err => reject(err),
+      ...params
+    })
+  })
+}
 // 获取页面。传0代表当前页面，传-1代表上一页
 export const getPage = function (index = 0){
   const pages = getCurrentPages(); // 获取页面栈
   return pages[pages.length - 1 - index]
+}
+// 订阅消息
+export const requestSubscribeMessage = function (params = {}){
+  return new Promise((resolve, reject) => {
+    wx.requestSubscribeMessage({
+      tmplIds: [''],
+      ...params,
+      success: res => resolve(res),
+      reject: err => reject(err)
+    })
+  })
+}
+// 查看文档
+export const openDocument = function (params = {}){
+  const { filePath, ...rest } = params
+  return new Promise((resolve, reject) => {
+    try{
+      wx.downloadFile({
+        url: filePath,
+        success: function (res) {
+          // showToast(res.tempFilePath)
+          wx.openDocument({
+            filePath: res.tempFilePath,
+            showMenu: false,
+            fileType: 'pdf',
+            ...rest,
+            success: res => resolve(res),
+            reject: err => reject(err)
+          })
+        }
+      })
+    } catch(e) {
+      showToast(e)
+    }
+  })
 }

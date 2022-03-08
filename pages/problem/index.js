@@ -17,6 +17,9 @@ Page({
   goRichText(){
     navigateTo('../richText/index')
   },
+  goCusForm(){
+    navigateTo('../cusForm/index')
+  },
   /**
    * 生命周期函数--监听页面加载
    */
