@@ -291,7 +291,7 @@ export const previewMedia = function (params = {}){
       showmenu: false,
       ...params,
       success: res => resolve(res),
-      reject: err => reject(err)
+      fail: err => reject(err)
     })
   })
 }
@@ -308,7 +308,7 @@ export const previewImage = function (params = {}){
       current: '',
       ...params,
       success: res => resolve(res),
-      reject: err => reject(err)
+      fail: err => reject(err)
     })
   })
 }
@@ -321,7 +321,7 @@ export const makePhoneCall = function (phoneNumber){
     wx.makePhoneCall({
       phoneNumber: String(phoneNumber),
       success: res => resolve(res),
-      reject: err => reject(err)
+      fail: err => reject(err)
     })
   })
 }
@@ -337,7 +337,7 @@ export const openLocation = function(params = {}){
       latitude: Number(latitude),
       longitude: Number(longitude),
       success: res => resolve(res),
-      reject: err => reject(err)
+      fail: err => reject(err)
     })
   })
 }
@@ -383,7 +383,7 @@ export const chooseImage = function (params){
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: res => resolve(res),
-      reject: err => reject(err),
+      fail: err => reject(err),
       ...params
     })
   })
@@ -405,7 +405,7 @@ export const uploadFile = function (params = {}){
         const newRes = JSON.parse(res.data)
         resolve(newRes.data)
       },
-      reject: err => reject(err),
+      fail: err => reject(err),
       ...params
     })
   })
@@ -422,7 +422,7 @@ export const requestSubscribeMessage = function (params = {}){
       tmplIds: [''],
       ...params,
       success: res => resolve(res),
-      reject: err => reject(err)
+      fail: err => reject(err)
     })
   })
 }
@@ -441,7 +441,7 @@ export const openDocument = function (params = {}){
             fileType: 'pdf',
             ...rest,
             success: res => resolve(res),
-            reject: err => reject(err)
+            fail: err => reject(err)
           })
         }
       })
