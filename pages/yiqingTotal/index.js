@@ -1,6 +1,5 @@
 // pages/yiqingTotal/index.js
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -10,25 +9,25 @@ Page({
     highDangerArea: [], // 高风险地区
     middleDangerArea: [], // 高风险地区
   },
-  getYQdata: function () {
+  getYQdata: function () {
     //抓取的这个网页的数据：https://vt.sm.cn/api/NCoVInfo/riskArea#/risk-areas
-    var data = {      
-      method: "Huoshenshan.riskArea",
-      format: "json",
+    var data = {      
+      method: "Huoshenshan.riskArea",
+      format: "json",
       // _:'1635407552057',
       // callback:axiosJsonpCallback1
     };
-    var url = 'https://m.sm.cn/api/rest?';
+    var url = 'https://m.sm.cn/api/rest?';
     wx.request({
-      type: "get",
-      dataType: 'jsonp',
-      data: data,
-      jsonp: "callback",
-      jsonpCallback: "axiosJsonpCallback1",
-      url: url,
-      success: res => {
-        const info =  JSON.parse(res.data)
-        if(info.status == 0) {
+      type: "get",
+      dataType: 'jsonp',
+      data: data,
+      jsonp: "callback",
+      jsonpCallback: "axiosJsonpCallback1",
+      url: url,
+      success: res => {
+        const info =  JSON.parse(res.data)
+        if(info.status == 0) {
           let { count, dateline, map } = info.data || {}
           const middleDangerNameArr = Object.keys(map[1] || {}) // 中风险地区名字
           const highDangerNameArr = Object.keys(map[2] || {}) // 高风险地区名字
@@ -37,7 +36,7 @@ Page({
           this.setData({count, dateline, highDangerArea, middleDangerArea})
         }
       },
-      fail: function (res) {
+      fail: function (res) {
         console.log(res)
       },
     })
