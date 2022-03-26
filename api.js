@@ -15,16 +15,12 @@ export const getUserProfile = function (options = {}) {
 // 显示loading
 export const showLoading = function (title = '加载中', duration = 0, mask = true) {
   wx.showLoading({ title, mask})
-  if(duration) {
-    hideLoading(duration)
-  }
+  if(duration) { hideLoading(duration) }
 }
 // 关闭loading
-export const hideLoading = function (time = 0) {
-  setTimeout(() => { wx.hideLoading() }, time)
-}
+export const hideLoading = (time = 0) => setTimeout(() => { wx.hideLoading() }, time)
 // 显示操作菜单
-export const showActionSheet = function (itemList){
+export const showActionSheet = function (itemList) {
   return new Promise((resolve, reject) => {
     wx.showActionSheet({
       itemList,
@@ -96,7 +92,7 @@ export const goBack = function (delta = 1){
         page.onLoad();
         resolve(res)
       },
-      fail: err => { reject(err) }
+      fail: err => reject(err)
     })
   })
 }
@@ -238,17 +234,11 @@ export const checkUpdateVersion = function () {
   }
 }
 // 设置localstorage
-export const setLocalStorage = function (key = '', val = ''){
-  wx.setStorageSync(key, val)
-}
+export const setLocalStorage = (key = '', val = '') => wx.setStorageSync(key, val)
 // 查看localstorage
-export const getLocalStorage = function (key = ''){
-  return wx.getStorageSync(key)
-}
+export const getLocalStorage = (key = '') => wx.getStorageSync(key)
 // 清除localStorage
-export const clearLocalStorage = function (){
-  wx.clearStorageSync()
-}
+export const clearLocalStorage = () => wx.clearStorageSync()
 /*****************图片相关api*************** */
 // 获取图片信息
 /**
@@ -443,7 +433,8 @@ export const openDocument = function (params = {}){
             success: res => resolve(res),
             fail: err => reject(err)
           })
-        }
+        },
+        fail: err => reject(err)
       })
     } catch(e) {
       showToast(e)
