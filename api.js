@@ -237,6 +237,8 @@ export const checkUpdateVersion = function () {
 export const setLocalStorage = (key = '', val = '') => wx.setStorageSync(key, val)
 // 查看localstorage
 export const getLocalStorage = (key = '') => wx.getStorageSync(key)
+// 清除localstorage某个字段
+export const removeLocalstorage = (key = '') => wx.removeStorageSync(key)
 // 清除localStorage
 export const clearLocalStorage = () => wx.clearStorageSync()
 /*****************图片相关api*************** */
