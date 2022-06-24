@@ -8,11 +8,9 @@ Page({
   data: {
 
   },
-  goSwiper(){
-    navigateTo('../carousel/index')
-  },
-  goLottie(){
-    navigateTo('../lottie/index')
+  goUrl(e){
+    const {url} = e.currentTarget.dataset
+    navigateTo(url)
   },
   /**
    * 生命周期函数--监听页面加载

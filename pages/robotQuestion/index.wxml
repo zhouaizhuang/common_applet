@@ -1,0 +1,179 @@
+<view class="bgf5 mh100vh ovya" id="questionBox" style="height:{{340 * formList.length}}rpx;" >
+  <!--答题进度条-->
+  <view class="bgf mb15r fixed t0 w100 zx20" style="height:10rpx;">
+    <view class="bg0db39e h100 trans3" style="width: {{(currentQuestion + 1) / formList.length * 100}}%"></view>
+  </view>
+  <view class="f ac xe fixed r0 zx10" style="top:20rpx">
+    <view class="bgf pt15r pb15r pl20r pr20r b" style="border-radius:50rpx 0 0 50rpx;"><text class="g1fc2ad fs40r pr10r">{{currentQuestion}}</text>/{{formList.length - 1}}</view>
+  </view>
+  <!--问答1-->
+  <view class="pl20r pr20r pt80r">
+    <view wx:for="{{formList}}" wx:for-item="item" wx:for-index="index" wx:key="unique">
+      <view wx:if="{{ item.formState > -2 }}" class="mb80r">
+        <!--问答环节-->
+        <view class="f ac mb40r">
+          <!--机器人图标-->
+          <view class="rel rds50 ovh mr22r bg0db39e" style="width:89rpx;height:89rpx;">
+            <image class="abs l50 t50 txy-50" src="../svg/jjzs_robot.svg" style="width:54rpx;height:60rpx;"></image>
+          </view>
+          <!--loading小点-->
+          <view wx:if="{{item.formState == -1}}" class="f">
+            <view class="rds50 bg0db39e mr10r aniDot" style="width:7px;height:7px;animation-delay:-0.3s;"></view>
+            <view class="rds50 bg0db39e mr10r aniDot" style="width:7px;height:7px;animation-delay:-0.15s;"></view>
+            <view class="rds50 bg0db39e aniDot" style="width:7px;height:7px;animation-delay:0s;"></view>
+          </view>
+          <!--问题-->
+          <view id="dom-{{index}}" class="bgf pt15r pb15r pl30r pr30r fs34r b {{item.formState >= 0 ? 'animated fast fadeInDown' : 'op0'}}" style="border-radius: 0 15rpx 15rpx 15rpx;">{{item.label}}</view>
+        </view>
+        <!--弹框，用户选择他的信息-->
+        <view class="f as xe rel">
+          <!--编辑图标-->
+          <view wx:if="{{item.formState == 2}}" bindtap="showEdit" data-index="{{index}}" class="f ac xc bgf rds50 mr20r {{ item.formState == 2 ? 'aniShowText' : ''}}" style="right:270rpx;width:80rpx;height:80rpx;">
+            <image src="../svg/jjzs_edit.svg" style="width:40rpx;height:40rpx;"></image>
+          </view>
+          <!---=============================================================================--->
+          <!---=============================选项类型=========================================--->
+          <!---=============================================================================--->
+          <!--1.性别选择-->
+          <view wx:if="{{item.type == 'gender'}}" class="bgf pl30r pr30r box-radius borderBox {{item.formState <= 0 ? 'dn' : item.formState == 1 ? 'f1 animated backInUp' : item.formState == 2 ? 'animateSave f ac xc' : 'f1'}}">
+            <view wx:if="{{item.formState == 1 || item.formState == 3}}" class="pt30r pb30r tc rel zx2 ovh">
+              <view class="f ac">
+                <view class="f1" bindtap="selectGender" data-index="{{index}}" data-id="0" data-item="{{item}}">
+                  <image src="../image/jjzs_man_icon.png" class="mb5r" style="width:158rpx;height:162rpx;"></image>
+                  <view class="fs30r g3 mb30r">男士</view>
+                  <view class="rds50 rel auto {{ item.defaultValue == '0' ? 'bg1fc2ad checked' : 'bge2 notChecked'}}" style="width:33rpx;height:33rpx;"></view>
+                </view>
+                <view class="f1" bindtap="selectGender" data-index="{{index}}" data-id="1" data-item="{{item}}">
+                  <image src="../image/jjzs_female_icon.png" class="mb5r" style="width:158rpx;height:162rpx;"></image>
+                  <view class="fs30r g3 mb30r">女士</view>
+                  <view class="rds50 rel auto {{ item.defaultValue == '1' ? 'bg1fc2ad checked' : 'bge2 notChecked'}}" style="width:33rpx;height:33rpx;"></view>
+                </view>
+              </view>
+            </view>
+            <view class="gf trans5 {{item.formState == 2 ? 'aniShowText' : 'op0'}}" style="font-size:30rpx;">{{item.showValue}}</view>
+          </view>
+          <!--2.数值选择器-->
+          <view wx:if="{{item.type == 'select'}}" class="bgf pl30r pr30r w100 box-radius borderBox {{item.formState <= 0 ? 'dn' : item.formState == 1 ? 'animated backInUp' : item.formState == 2 ? 'animateSave f ac xc' : ''}}">
+            <view wx:if="{{item.formState == 1 || item.formState == 3}}" class="tc rel zx2 ovh singleSelect pt30r pb30r" >
+              <van-picker
+                columns="{{ item.options }}"
+                default-index="{{ item.index }}"
+                bind:change="onChangeSelect"
+                data-item="{{item}}"
+                data-bigindex="{{index}}"
+              />
+              <view class="abs r0 g6 b fs34r" style="top:46%;">{{item.unit}}</view>
+            </view>
+            <view wx:if="{{item.formState == 1 || item.formState == 3}}" class="bg0db39e rds50r gf pt20r pb20r f ac xc b fs34r" bindtap="goContinue" data-index="{{index}}"  data-item="{{item}}">继续</view>
+            <view class="gf trans5 {{item.formState == 2 ? 'aniShowText' : 'op0'}}" style="font-size:30rpx;">{{item.showValue}}</view>
+          </view>
+          <!--3.浮点选择器-->
+          <view wx:if="{{item.type == 'floatSelect'}}" class="bgf pl30r pr30r w100 box-radius borderBox {{item.formState <= 0 ? 'dn' : item.formState == 1 ? 'animated backInUp' : item.formState == 2 ? 'animateSave f ac xc' : ''}}">
+            <view wx:if="{{item.formState == 1 || item.formState == 3}}" class="tc rel zx2 ovh singleSelect pt30r pb30r" >
+              <van-picker
+                columns="{{ item.options }}"
+                default-index="{{ item.index }}"
+                bind:change="changeWeight"
+                data-item="{{item}}"
+                data-bigindex="{{index}}"
+              />
+              <view class="abs g6 b fs50r" style="left:50%;top:44%;">.</view>
+              <view class="abs r0 g6 b fs34r" style="top:46%;">kg</view>
+            </view>
+            <view wx:if="{{item.formState == 1 || item.formState == 3}}" class="bg0db39e rds50r gf pt20r pb20r f ac xc b fs34r" bindtap="goContinue" data-index="{{index}}"  data-item="{{item}}">继续</view>
+            <view class="gf trans5 {{item.formState == 2 ? 'aniShowText' : 'op0'}}" style="font-size:30rpx;">{{item.showValue}}</view>
+          </view>
+          <!--4.高级选择器-->
+          <view wx:if="{{item.type == 'highSelect'}}" class="bgf pl30r pr30r w100 box-radius borderBox {{item.formState <= 0 ? 'dn' : item.formState == 1 ? 'animated backInUp' : item.formState == 2 ? 'animateSave f ac xc' : ''}}">
+            <view wx:if="{{item.formState == 1 || item.formState == 3}}" class="tc rel zx2 ovh singleSelect pt30r pb30r" >
+              <van-picker
+                columns="{{ item.options }}"
+                default-index="{{ item.index }}"
+                bind:change="changeHighSelect"
+                data-item="{{item}}"
+                data-bigindex="{{index}}"
+              />
+              <view class="abs r0 g6 b" style="top:47%;">{{item.unit}}</view>
+            </view>
+            <view wx:if="{{item.formState == 1 || item.formState == 3}}" class="bg0db39e rds50r gf pt20r pb20r f ac xc b fs34r" bindtap="goContinue" data-index="{{index}}"  data-item="{{item}}">继续</view>
+            <view class="gf trans5 {{item.formState == 2 ? 'aniShowText' : 'op0'}}" style="font-size:30rpx;">{{item.showValue}}</view>
+          </view>
+          <!--4.单选-->
+          <view wx:if="{{item.type == 'radio'}}" style="{{item.formState == 2 ? 'max-width:350rpx;' : ''}}" class="bgf pl30r pr30r box-radius borderBox pt20r pb20r trans5 {{item.formState <= 0 ? 'dn' : item.formState == 1 ? 'f1 animated backInUp' : item.formState == 2 ? 'radioSave f ac xc' : 'f1'}}">
+            <view wx:if="{{item.formState == 1 || item.formState == 3}}" class="tc rel zx2 ovh singleSelect" >
+              <view class="pt45r pl35r pr35r">
+                <view
+                  bindtap="selectRadio" data-item="{{v}}" data-bigitem="{{item}}" data-bigindex="{{index}}" 
+                  wx:for="{{item.options}}" wx:for-item="v" wx:for-index="i" wx:key="unique"
+                  class="rds40r f ac xc pt18r pb18r mb15r fs30r {{v.isChecked ? 'bg0db39e gf' : 'g3 bgf' }}"
+                  style="border: 1rpx solid #E3E3E3;"
+                >
+                  {{v.text}}
+                </view>
+              </view>
+            </view>
+            <view class="gf trans5 {{item.formState == 2 ? 'aniShowText' : 'op0'}}" style="font-size:30rpx;">{{item.showValue}}</view>
+          </view>
+          <!--5.多选-->
+          <view wx:if="{{item.type == 'checkBox'}}" style="{{item.formState == 2 ? 'max-width:350rpx;' : ''}}" class="bgf pl30r pr30r box-radius borderBox pt20r trans5 {{item.formState <= 0 ? 'dn' : item.formState == 1 ? 'f1 animated backInUp' : item.formState == 2 ? 'radioSave f ac xc' : 'f1'}}">
+            <view wx:if="{{item.formState == 1 || item.formState == 3}}" class="tc rel zx2 mb30r">
+              <view class="abs f ac xc" style="top:-24rpx;left:-50rpx;width:152rpx;height:74rpx;">
+                <image src="../image/jjzs_check_box_icon.png" class="abs zx1" style="width:152rpx;height:74rpx;"></image>
+                <view class="fs30r b gf rel zx10" style="transform: translateY(-4rpx);">多选题</view>
+              </view>
+              <view class="pt45r pl35r pr35r ovya" style="max-height:600rpx;">
+                <view
+                  bindtap="selectCheckBox" data-item="{{v}}" data-bigitem="{{item}}" data-bigindex="{{index}}" 
+                  wx:for="{{item.options}}" wx:for-item="v" wx:for-index="i" wx:key="unique"
+                  class="rds40r f ac xc pt18r pb18r mb15r fs30r {{v.isChecked ? 'bg0db39e gf' : 'g3 bgf' }}"
+                  style="border: 1rpx solid #E3E3E3;"
+                >
+                  {{v.text}}
+                </view>
+              </view>
+            </view>
+            <view wx:if="{{item.formState == 1 || item.formState == 3}}" class="bg0db39e rds50r gf mt15r pt20r pb20r f ac xc b fs34r" bindtap="goContinue" data-index="{{index}}" data-item="{{item}}">继续</view>
+            <view class="gf trans5 {{item.formState == 2 ? 'aniShowText' : 'op0'}}" style="font-size:30rpx;">{{item.showValue}}</view>
+          </view>
+          <!--6.用药情况-->
+          <view wx:if="{{item.type == 'medicalLevel'}}" style="{{item.formState == 2 ? 'max-width:350rpx;' : ''}}" class="bgf pl30r pr30r w100 box-radius borderBox pt20r pb20r trans5 {{item.formState <= 0 ? 'dn' : item.formState == 1 ? 'f1 animated backInUp' : item.formState == 2 ? 'radioSave f ac xc rw' : 'f1'}}">
+            <view wx:if="{{item.formState == 1 || item.formState == 3}}" class="tc rel zx2 mb20r">
+              <view class="pt20r pl20r pr20r ovya" style="max-height:600rpx;">
+                <view class="bdc rds20r">
+                  <view class="f bdbe fs24r pt25r pb25r">
+                    <view class="f1">疾病名称</view>
+                    <view class="f1">不服药</view>
+                    <view class="f1">偶尔服药</view>
+                    <view class="f1">经常服药</view>
+                  </view>
+                  <view wx:for="{{item.options}}" wx:for-item="v" wx:for-index="i" wx:key="unique" class="f fs24r bdbe">
+                    <view class="f1 pt25r pb25r">{{v.text}}</view>
+                    <view class="f1 pt25r pb25r" bindtap="toogleMedicalLevel" data-i="{{i}}" data-level="{{3}}" data-bigindex="{{index}}">
+                      <image src="{{v.level== 3 ? '../svg/jjzs_checked.svg' : '../svg/jjzs_notCheck.svg'}}" style="width:32rpx;height:32rpx;"></image>
+                    </view>
+                    <view class="f1 pt25r pb25r" bindtap="toogleMedicalLevel" data-i="{{i}}" data-level="{{2}}" data-bigindex="{{index}}" >
+                      <image src="{{v.level== 2 ? '../svg/jjzs_checked.svg' : '../svg/jjzs_notCheck.svg'}}" style="width:32rpx;height:32rpx;"></image>
+                    </view>
+                    <view class="f1 pt25r pb25r" bindtap="toogleMedicalLevel" data-i="{{i}}" data-level="{{1}}" data-bigindex="{{index}}">
+                      <image src="{{v.level== 1 ? '../svg/jjzs_checked.svg' : '../svg/jjzs_notCheck.svg'}}" style="width:32rpx;height:32rpx;"></image>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view wx:if="{{item.formState == 1 || item.formState == 3}}" class="g9 pl30r pb15r fs20r tc {{isTipSelect ? 'animated heartBeat' : ''}}" style="color:#0db39e;">您需要填写每种疾病的用药情况，才能继续哦！</view>
+            <view wx:if="{{item.formState == 1 || item.formState == 3}}" class="rds50r gf pt20r pb20r f ac xc b fs34r {{item.defaultValue.length == item.options.length ? 'bg0db39e' : 'bg0db39e-02'}}" bindtap="{{item.defaultValue.length == item.options.length ? 'goContinue' : 'tipSelect'}}" data-index="{{index}}" data-item="{{item}}">继续</view>
+            <view wx:for="{{item.showValue}}" wx:for-item="v" wx:for-index="i" wx:key="unique" class="w100 gf trans5 mb5r {{item.formState == 2 ? 'aniShowText' : 'op0 h0'}}" style="font-size:30rpx;">{{v}}</view>
+          </view>
+          <!--7.评测结束-->
+          <view wx:if="{{item.type == 'questionSubmit'}}" style="border-radius: 10rpx 10rpx 0 0;" class="bgf fixed zx1000 b0 pl50r pr50r l0 r0 borderBox pt30r pb30r trans5 {{item.formState <= 0 ? 'dn' : 'f1'}}">
+            <view class="breath-btn bg0db39e rds50r gf pt20r pb20r f ac xc b fs34r" bindtap="submitForm">查看结果</view>
+          </view>
+          <!--用户头像-->
+          <image wx:if="{{formList[0].defaultValue == '0'}}" class="rds50 trans3 ml20r {{item.formState == 2 ? 'aniShowText' : 'dn'}}" style="width:70rpx;height:70rpx;" src="../image/jjzs_man_icon.png"></image>
+          <image wx:if="{{formList[0].defaultValue == '1'}}" class="rds50 trans3 ml20r {{item.formState == 2 ? 'aniShowText' : 'dn'}}" style="width:70rpx;height:70rpx;" src="../image/jjzs_female_icon.png"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

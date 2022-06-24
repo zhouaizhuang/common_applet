@@ -10,7 +10,9 @@
     "pages/feedBack/index",
     "pages/carousel/index",
     "pages/lottie/index",
-    "pages/cusForm/index"
+    "pages/cusForm/index",
+    "pages/dynmaicForm/index",
+    "pages/robotQuestion/index"
   ],
   "window":{
     "backgroundTextStyle":"light",

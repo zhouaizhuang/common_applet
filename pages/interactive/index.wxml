@@ -1,8 +1,9 @@
 <!--index.wxml-->
 <view class="bgf5" style="min-height:100vh;">
   <view class="f rw b fs32r tc pt30r">
-    <view class="w50 mb50r" bindtap="goSwiper">轮播图</view>
-    <view class="w50 mb50r" bindtap="goLottie">AE动画</view>
+    <view class="w50 mb50r" bindtap="goUrl" data-url="/pages/carousel/index">轮播图</view>
+    <view class="w50 mb50r" bindtap="goUrl" data-url="/pages/lottie/index">AE动画</view>
+    <view class="w50 mb50r" bindtap="goUrl" data-url="/pages/robotQuestion/index">机器人问答</view>
   </view>
   <tabbar selectTab="interactive"></tabbar>
 </view>
