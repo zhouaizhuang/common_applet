@@ -11,7 +11,8 @@
     "pages/carousel/index",
     "pages/lottie/index",
     "pages/cusForm/index",
-    "pages/robotQuestion/index"
+    "pages/robotQuestion/index",
+    "pages/useCanvas/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
