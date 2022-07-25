@@ -1,0 +1,6 @@
+<view class="mh100vh bgf5">
+  <view class="fs30r b pb30r pt30r pl30r">请选择年龄？</view>
+  <view class="ml30r mr30r bgf rds30r">
+    <Zpicker list="{{list}}" age="{{age}}" bind:setAge="setAge"></Zpicker>
+  </view>
+</view>

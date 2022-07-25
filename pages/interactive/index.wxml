@@ -5,6 +5,7 @@
     <view class="w50 mb50r" bindtap="goUrl" data-url="/pages/lottie/index">AE动画</view>
     <view class="w50 mb50r" bindtap="goUrl" data-url="/pages/robotQuestion/index">机器人问答</view>
     <view class="w50 mb50r" bindtap="goUrl" data-url="/pages/useCanvas/index">使用canvas</view>
+    <view class="w50 mb50r" bindtap="goUrl" data-url="/pages/quickPicker/index">快速选择器</view>
   </view>
   <tabbar selectTab="interactive"></tabbar>
 </view>

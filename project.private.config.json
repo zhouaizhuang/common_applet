@@ -34,6 +34,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "快速选择器",
+          "pathName": "pages/quickPicker/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

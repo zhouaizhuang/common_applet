@@ -1,0 +1,21 @@
+<view class="ovh rel bgf tc" style="height:580rpx;">
+  <view 
+    catch:touchstart="touchStart"
+    catch:touchmove="touchMove"
+    catch:touchend="touchEnd"
+    style="transform:{{optObj.style.transform}};transition:{{optObj.style.transition}};"
+  >
+    <view style="padding-top:100px;">
+      <view
+        wx:for="{{list}}" wx:for-item="v" wx:for-index="index" wx:key="unique"
+        class="fs30r"
+        style="height:{{optionHeight}}px;"
+      >
+        <view wx:if="{{index == optObj.activeIndex}}" class="b ts1-5">{{v}}</view>
+        <view wx:elif="{{index < optObj.activeIndex}}" class="gc op{{10 - (optObj.activeIndex - index) < 0 ? '0' : 10 - (optObj.activeIndex - index)}}">{{v}}</view>
+        <view wx:elif="{{index > optObj.activeIndex}}" class="gc op{{10 - (index -optObj.activeIndex) < 0 ? '0' : 10 - (index - optObj.activeIndex)}}">{{v}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="bdbe abs w100 tr pb10r b zx10" style="top:210rpx;">岁</view>
+</view>

@@ -12,7 +12,8 @@
     "pages/lottie/index",
     "pages/cusForm/index",
     "pages/robotQuestion/index",
-    "pages/useCanvas/index"
+    "pages/useCanvas/index",
+    "pages/quickPicker/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
