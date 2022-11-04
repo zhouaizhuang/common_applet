@@ -126,6 +126,15 @@ export const getPosition = function (e) {
 ******************************************字符串操作*********************************************
 **********************************************************************************************
 */
+/**
+ * 数据转为字符串
+ * @param {*} val 需要转成字符串的值
+ * @returns 
+ * 举例子 toString([{name:'zzz', age:18}]) ---> '[\n  {\n    "name": "asd",\n    "ae": "as"\n  }\n]'
+ */
+export const toString = function (val) {
+  return val == null ? '' : isReference ? JSON.stringify(val, null, 2) : String(val)
+}
 /** 返回是否以某个字符串开头
  * @param {String} str 目标字符串
  * @param {String} keywords 需要搜索的开头的字符串

@@ -6,6 +6,7 @@
     <view class="w50 mb50r" bindtap="previewImg">预览图片</view>
     <view class="w50 mb50r" bindtap="goFeedBack">交互反馈</view>
     <view class="w50 mb50r" bindtap="callPhone">打电话</view>
+    <view class="w50 mb50r" bindtap="scanCode">扫码</view>
   </view>
   <tabbar selectTab="index"></tabbar>
 </view>
